@@ -14,11 +14,12 @@ import src.business.Library;
 import src.business.Magazine;
 import src.utils.DateUtils;
 import src.utils.Filter;
+import src.utils.InputValidator;
 
 public class ConsoleUI {
 
     Library lib;
-    Scanner in = new Scanner(System.in);
+    Scanner in = new Scanner(System.in).useDelimiter(System.lineSeparator());
     int input = -1;
 
     public ConsoleUI() {
@@ -36,8 +37,6 @@ public class ConsoleUI {
     }
 
     public int showMenu() {
-
-        in.useDelimiter(System.lineSeparator());
 
         do {
             System.out.println("\n\t\t+----------------------------------------+");
@@ -97,29 +96,16 @@ public class ConsoleUI {
     private void addDocumentUI() {
         Document doc;
         LocalDate publicationDate = null;
-        in.useDelimiter(System.lineSeparator());
 
-        do {
-            System.out.println("What would you like to add ?\n 1- Book \t\t 2- Magazine");
-            try {
-                input = in.nextInt();
-                if (input < 1 || input > 2) {
-                    System.out.println("Please pick a choice between 1 and 2...");
-                    in.next();
-                }
-            } catch (Exception e) {
-            }
+        String message = "What would you like to add ?\n 1- Book \t\t 2- Magazine \n";
 
-        } while (input < 1 || input > 2);
+        input = InputValidator.promptAndParseInt(message, 1, 2);
 
-        System.out.print("Enter book title: ");
-        String title = in.next();
+        String title = InputValidator.promptAndParseString("Enter book title: ");
 
-        System.out.print("Enter author name: ");
-        String author = in.next();
+        String author = InputValidator.promptAndParseString("Enter author name: ");
 
-        System.out.print("Enter number of pages: ");
-        int pageNumbers = in.nextInt();
+        int pageNumbers = InputValidator.promptAndParseInt("Enter number of pages: ");
 
         // ---------- Date validation ----------------
         while (publicationDate == null) {
@@ -155,7 +141,7 @@ public class ConsoleUI {
     }
 
     private void borrowDocumentUI() {
-        in.useDelimiter(System.lineSeparator());
+        // in.useDelimiter(System.lineSeparator());
         List<Document> filteredDocuments = listDocumentsUI(Filter.AVAILABLE);
 
         if (filteredDocuments.isEmpty()) {
@@ -260,7 +246,7 @@ public class ConsoleUI {
     private void findDocumentUI() {
 
         Map<String, Document> documents = lib.getDocumentMap();
-        in.useDelimiter(System.lineSeparator());
+        // in.useDelimiter(System.lineSeparator());
 
         System.out.print("Enter the title of the document: ");
         String input = in.next();

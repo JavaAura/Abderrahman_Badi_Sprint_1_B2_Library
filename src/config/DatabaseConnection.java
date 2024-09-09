@@ -5,7 +5,6 @@ public class DatabaseConnection {
 
     // Singleton instance
     private static DatabaseConnection instance;
-    // Database connection object
     private Connection connection;
 
     private static String url = System.getenv("DB_URL");
@@ -26,16 +25,16 @@ public class DatabaseConnection {
     public static DatabaseConnection getInstance() {
         try {
             if (instance == null) {
-                synchronized (DatabaseConnection.class) {
-                    if (instance == null) {
-                        instance = new DatabaseConnection();
-                    }
-                }
+
+                instance = new DatabaseConnection();
+
             } else if (instance.getConnection().isClosed()) {
                 instance = new DatabaseConnection();
             }
 
-        } catch (Exception e) {
+        } catch (
+
+        Exception e) {
             System.out.println("PostgreSQL JDBC Driver not found.");
         }
 
