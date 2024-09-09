@@ -67,7 +67,7 @@ public final class InputValidator {
     }
 
     public static LocalDate promptAndParseDate(String message) {
-        while (true) {
+        do {
             try {
                 System.out.print(message);
                 String dateString = in.next();
@@ -80,7 +80,7 @@ public final class InputValidator {
                 System.out.print(e.getMessage());
                 in.next();
             }
-        }
+        } while (true);
     }
 
 }

@@ -97,9 +97,9 @@ public class ConsoleUI {
         Document doc;
         LocalDate publicationDate = null;
 
-        String message = "What would you like to add ?\n 1- Book \t\t 2- Magazine \n";
+        String message = "What would you like to add ?\n 1- Book \t\t\t 2- Magazine \n 3- Scientific Journal \t\t 4- University Thesis \n";
 
-        input = InputValidator.promptAndParseInt(message, 1, 2);
+        input = InputValidator.promptAndParseInt(message, 1, 4);
 
         String title = InputValidator.promptAndParseString("Enter book title: ");
 
@@ -107,30 +107,13 @@ public class ConsoleUI {
 
         int pageNumbers = InputValidator.promptAndParseInt("Enter number of pages: ");
 
-        // ---------- Date validation ----------------
-        while (publicationDate == null) {
-            try {
-                System.out.print("Enter publication date (dd-MM-yyyy): ");
-                String dateString = in.next();
-
-                // Parse and check if the date is valid (pattern)
-                publicationDate = DateUtils.parseDate(dateString);
-            } catch (DateTimeParseException e) {
-                System.out.print("Invalid date format. Please enter the date in the format dd-MM-yyyy...");
-                in.next();
-            } catch (Exception e) {
-                System.out.print(e.getMessage());
-                in.next();
-            }
-        }
+        publicationDate = InputValidator.promptAndParseDate("Enter publication date (dd-MM-yyyy): ");
 
         if (input == 1) {
-            System.out.print("Enter book number: ");
-            int number = in.nextInt();
+            int number = InputValidator.promptAndParseInt("Enter book number: ");
             doc = new Book(title, author, publicationDate, pageNumbers, number);
         } else {
-            System.out.print("Enter ISBN number: ");
-            int number = in.nextInt();
+            int number = InputValidator.promptAndParseInt("Enter ISBN number: ");
             doc = new Magazine(title, author, publicationDate, pageNumbers, number);
         }
 
