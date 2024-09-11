@@ -1,14 +1,13 @@
 package src.dao.document;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Optional;
 
 import src.business.ScientificJournal;
 import src.dao.interfaces.ScientificJournalDAO;
 
 public class ScientificJournalDAOImpl implements ScientificJournalDAO {
-    private List<ScientificJournal> journals = new ArrayList<>();
+    private HashMap<Long, ScientificJournal> journals = new HashMap<>();
 
     @Override
     public Optional<ScientificJournal> get(long id) {
@@ -16,23 +15,23 @@ public class ScientificJournalDAOImpl implements ScientificJournalDAO {
     }
 
     @Override
-    public List<ScientificJournal> getAll() {
+    public HashMap<Long, ScientificJournal> getAll() {
 
         return journals;
     }
 
     @Override
-    public void save(ScientificJournal t) {
+    public void save(ScientificJournal journal) {
 
     }
 
     @Override
-    public void update(ScientificJournal t, String[] params) {
+    public void update(ScientificJournal journal, String[] params) {
 
     }
 
     @Override
-    public void delete(ScientificJournal t) {
+    public void delete(ScientificJournal journal) {
 
     }
 }

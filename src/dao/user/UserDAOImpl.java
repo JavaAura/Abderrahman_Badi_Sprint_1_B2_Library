@@ -1,14 +1,13 @@
 package src.dao.user;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Optional;
 
 import src.business.User;
 import src.dao.interfaces.UserDAO;
 
 public class UserDAOImpl implements UserDAO {
-    private List<User> users = new ArrayList<>();
+    private HashMap<Long, User> users = new HashMap<>();
 
     @Override
     public Optional<User> get(long id) {
@@ -16,23 +15,23 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public List<User> getAll() {
+    public HashMap<Long, User> getAll() {
 
         return users;
     }
 
     @Override
-    public void save(User t) {
+    public void save(User user) {
         throw new UnsupportedOperationException("Save operation is not supported in UserDAOImpl.");
     }
 
     @Override
-    public void update(User t, String[] params) {
+    public void update(User user, String[] params) {
         throw new UnsupportedOperationException("Update operation is not supported in UserDAOImpl.");
     }
 
     @Override
-    public void delete(User t) {
+    public void delete(User user) {
         throw new UnsupportedOperationException("Delete operation is not supported in UserDAOImpl.");
     }
 }

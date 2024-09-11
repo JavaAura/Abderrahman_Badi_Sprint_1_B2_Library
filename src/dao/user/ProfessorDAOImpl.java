@@ -1,15 +1,13 @@
 package src.dao.user;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Optional;
 
 import src.business.Professor;
 import src.dao.interfaces.ProfessorDAO;
 
 public class ProfessorDAOImpl implements ProfessorDAO {
-    private List<Professor> professors = new ArrayList<>();
-
+    private HashMap<Long, Professor> professors = new HashMap<>();
 
     @Override
     public Optional<Professor> get(long id) {
@@ -17,23 +15,23 @@ public class ProfessorDAOImpl implements ProfessorDAO {
     }
 
     @Override
-    public List<Professor> getAll() {
+    public HashMap<Long, Professor> getAll() {
 
         return professors;
     }
 
     @Override
-    public void save(Professor t) {
+    public void save(Professor professor) {
 
     }
 
     @Override
-    public void update(Professor t, String[] params) {
+    public void update(Professor professor, String[] params) {
 
     }
 
     @Override
-    public void delete(Professor t) {
+    public void delete(Professor professor) {
 
     }
 }

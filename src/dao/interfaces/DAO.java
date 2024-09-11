@@ -1,12 +1,12 @@
 package src.dao.interfaces;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Optional;
 
 public interface DAO<T> {
     Optional<T> get(long id);
 
-    List<T> getAll();
+    HashMap<Long, T> getAll();
 
     void save(T t);
 

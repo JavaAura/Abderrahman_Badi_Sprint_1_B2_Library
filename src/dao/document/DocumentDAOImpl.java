@@ -1,14 +1,13 @@
 package src.dao.document;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Optional;
 
 import src.business.Document;
 import src.dao.interfaces.DocumentDAO;
 
 public class DocumentDAOImpl implements DocumentDAO {
-    private List<Document> documents = new ArrayList<>();
+    private HashMap<Long, Document> documents = new HashMap<>();
 
     @Override
     public Optional<Document> get(long id) {
@@ -16,19 +15,19 @@ public class DocumentDAOImpl implements DocumentDAO {
     }
 
     @Override
-    public List<Document> getAll() {
+    public HashMap<Long, Document> getAll() {
         return documents;
     }
 
-    public void save(Document t) {
+    public void save(Document document) {
         throw new UnsupportedOperationException("Save operation is not supported in DocumentDAOImpl.");
     }
 
-    public void update(Document t, String[] params) {
+    public void update(Document document, String[] params) {
         throw new UnsupportedOperationException("Update operation is not supported in DocumentDAOImpl.");
     }
 
-    public void delete(Document t) {
+    public void delete(Document document) {
         throw new UnsupportedOperationException("Delete operation is not supported in DocumentDAOImpl.");
     }
 }

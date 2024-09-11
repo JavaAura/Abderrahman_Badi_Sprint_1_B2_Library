@@ -1,14 +1,13 @@
 package src.dao.document;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Optional;
 
 import src.business.Magazine;
 import src.dao.interfaces.MagazineDAO;
 
 public class MagazineDAOImpl implements MagazineDAO {
-    private List<Magazine> magazines = new ArrayList<>();
+    private HashMap<Long, Magazine> magazines = new HashMap<>();
 
     @Override
     public Optional<Magazine> get(long id) {
@@ -16,23 +15,23 @@ public class MagazineDAOImpl implements MagazineDAO {
     }
 
     @Override
-    public List<Magazine> getAll() {
+    public HashMap<Long, Magazine> getAll() {
 
         return magazines;
     }
 
     @Override
-    public void save(Magazine t) {
+    public void save(Magazine magazine) {
 
     }
 
     @Override
-    public void update(Magazine t, String[] params) {
+    public void update(Magazine magazine, String[] params) {
 
     }
 
     @Override
-    public void delete(Magazine t) {
+    public void delete(Magazine magazine) {
 
     }
 }
