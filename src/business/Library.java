@@ -23,14 +23,6 @@ public class Library {
         System.out.println("Document added successfully!");
     }
 
-    public void borrowDocument(Document doc) {
-        doc.borrowDoc();
-    }
-
-    public void returnDocument(Document doc) {
-        doc.returnDoc();
-    }
-
     public void seedLibrary() {
         Random random = new Random();
 

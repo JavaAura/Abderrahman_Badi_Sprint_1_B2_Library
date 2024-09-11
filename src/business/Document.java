@@ -23,10 +23,6 @@ abstract public class Document {
         this.pageNumbers = pageNumbers;
     }
 
-    public abstract void borrowDoc();
-
-    public abstract void returnDoc();
-
     public abstract void showDetails();
 
     // --------------- Getters / Setters -----------------------

@@ -2,18 +2,17 @@ package src.business;
 
 import java.time.LocalDate;
 
-public class Book extends Document {
+public class UniversityThesis extends Document {
+    private String field;
 
-    private int number;
+    public UniversityThesis() {
 
-    public Book() {
     }
 
-    public Book(String name, String author, LocalDate publicationDate, int pageNumbers, int number) {
+    public UniversityThesis(String name, String author, LocalDate publicationDate, int pageNumbers, String field) {
         super(name, author, publicationDate, pageNumbers);
-        this.number = number;
+        this.field = field;
     }
-
 
     @Override
     public void showDetails() {
@@ -23,16 +22,14 @@ public class Book extends Document {
         System.out.println("\n\t Author: " + getAuthor());
         System.out.println("\n\t Publication Date: " + getPublicationDate());
         System.out.println("\n\t Number of Pages: " + getPageNumbers());
-        System.out.println("\n\t Book Number: " + this.number);
+        System.out.println("\n\t Book Number: " + this.field);
     }
 
-    // --------------- Getters / Setters -----------------------
-
-    public int getNumber() {
-        return this.number;
+    public String getField() {
+        return this.field;
     }
 
-    public void setNumber(int value) {
-        this.number = value;
+    public void setField(String value) {
+        this.field = value;
     }
 }

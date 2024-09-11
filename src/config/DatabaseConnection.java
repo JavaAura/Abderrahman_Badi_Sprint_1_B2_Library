@@ -44,8 +44,4 @@ public class DatabaseConnection {
     public Connection getConnection() {
         return connection;
     }
-
-    public static void main(String[] args) {
-        DatabaseConnection cn = DatabaseConnection.getInstance();
-    }
 }

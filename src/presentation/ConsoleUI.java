@@ -1,7 +1,6 @@
 package src.presentation;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +11,6 @@ import src.business.Book;
 import src.business.Document;
 import src.business.Library;
 import src.business.Magazine;
-import src.utils.DateUtils;
 import src.utils.Filter;
 import src.utils.InputValidator;
 

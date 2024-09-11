@@ -15,16 +15,6 @@ public class Magazine extends Document {
     }
 
     @Override
-    public void borrowDoc() {
-        this.setIsBorrowed(true);
-    }
-
-    @Override
-    public void returnDoc() {
-        this.setIsBorrowed(false);
-    }
-
-    @Override
     public void showDetails() {
         System.out.println("\n Magazine Details:");
         System.out.println("\n\t ID: " + getId());
