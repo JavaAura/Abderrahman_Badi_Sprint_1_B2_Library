@@ -1,13 +1,13 @@
-package src.dao.DocumentDAO;
+package src.dao.document;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import src.business.UniversityThesis;
-import src.dao.DAO;
+import src.dao.interfaces.DAO;
 
-public class UniversityThesisDAO implements DAO<UniversityThesis> {
+public class UniversityThesisDAOImpl implements DAO<UniversityThesis> {
 
     private List<UniversityThesis> thesis = new ArrayList<>();
 

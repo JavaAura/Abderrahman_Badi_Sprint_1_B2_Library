@@ -1,13 +1,13 @@
-package src.dao.DocumentDAO;
+package src.dao.document;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import src.business.ScientificJournal;
-import src.dao.DAO;
+import src.dao.interfaces.DAO;
 
-public class ScientificJournalDAO implements DAO<ScientificJournal> {
+public class ScientificJournalDAOImpl implements DAO<ScientificJournal> {
     private List<ScientificJournal> journals = new ArrayList<>();
 
     @Override

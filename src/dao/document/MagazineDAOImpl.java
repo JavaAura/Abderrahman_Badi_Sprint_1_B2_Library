@@ -1,13 +1,13 @@
-package src.dao.DocumentDAO;
+package src.dao.document;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import src.business.Magazine;
-import src.dao.DAO;
+import src.dao.interfaces.DAO;
 
-public class MagazineDAO implements DAO<Magazine> {
+public class MagazineDAOImpl implements DAO<Magazine> {
     private List<Magazine> magazines = new ArrayList<>();
 
     @Override
