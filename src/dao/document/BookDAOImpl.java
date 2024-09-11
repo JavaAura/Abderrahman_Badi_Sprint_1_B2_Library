@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import src.business.Book;
-import src.dao.interfaces.DAO;
+import src.dao.interfaces.BookDAO;
 
-public class BookDAOImpl implements DAO<Book> {
+public class BookDAOImpl implements BookDAO {
     private List<Book> books = new ArrayList<>();
 
     @Override

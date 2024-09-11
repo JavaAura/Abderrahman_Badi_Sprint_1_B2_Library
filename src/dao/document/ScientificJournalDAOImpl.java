@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import src.business.ScientificJournal;
-import src.dao.interfaces.DAO;
+import src.dao.interfaces.ScientificJournalDAO;
 
-public class ScientificJournalDAOImpl implements DAO<ScientificJournal> {
+public class ScientificJournalDAOImpl implements ScientificJournalDAO {
     private List<ScientificJournal> journals = new ArrayList<>();
 
     @Override

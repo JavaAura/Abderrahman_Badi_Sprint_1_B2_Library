@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import src.business.Magazine;
-import src.dao.interfaces.DAO;
+import src.dao.interfaces.MagazineDAO;
 
-public class MagazineDAOImpl implements DAO<Magazine> {
+public class MagazineDAOImpl implements MagazineDAO {
     private List<Magazine> magazines = new ArrayList<>();
 
     @Override

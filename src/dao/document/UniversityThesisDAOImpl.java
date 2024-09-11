@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import src.business.UniversityThesis;
-import src.dao.interfaces.DAO;
+import src.dao.interfaces.UniversityThesisDAO;
 
-public class UniversityThesisDAOImpl implements DAO<UniversityThesis> {
+public class UniversityThesisDAOImpl implements UniversityThesisDAO {
 
     private List<UniversityThesis> thesis = new ArrayList<>();
 
