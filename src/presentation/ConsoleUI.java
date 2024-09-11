@@ -7,10 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import src.business.Book;
 import src.business.Document;
 import src.business.Library;
-import src.business.Magazine;
 import src.utils.Filter;
 import src.utils.InputValidator;
 
@@ -22,7 +20,6 @@ public class ConsoleUI {
 
     public ConsoleUI() {
         this.lib = new Library();
-        lib.seedLibrary();
     }
 
     // ------------ Menu loop --------------
@@ -31,7 +28,7 @@ public class ConsoleUI {
         do {
             input = showMenu();
             menuHandler(input);
-        } while (input != 6);
+        } while (input != 3);
     }
 
     public int showMenu() {
@@ -41,19 +38,16 @@ public class ConsoleUI {
             System.out.println("\t\t|            MENU PRINCIPALE             |");
             System.out.println("\t\t+----------------------------------------+");
             System.out.println("\t\t|                                        |");
-            System.out.println("\t\t|     1- Add a document                  |");
-            System.out.println("\t\t|     2- Borrow a document               |");
-            System.out.println("\t\t|     3- Return a document               |");
-            System.out.println("\t\t|     4- Show all documents              |");
-            System.out.println("\t\t|     5- Find a document                 |");
-            System.out.println("\t\t|     6- Exit                            |");
+            System.out.println("\t\t|     1- Manage Documents                |");
+            System.out.println("\t\t|     2- Manage Users                    |");
+            System.out.println("\t\t|     3- Exit                            |");
             System.out.println("\t\t|                                        |");
             System.out.println("\t\t+----------------------------------------+");
             System.out.print("Pick your choice : ");
 
             try {
                 input = in.nextInt();
-                if (input < 1 || input > 6) {
+                if (input < 1 || input > 3) {
                     System.out.print("Please pick a choice between 1 and 6...");
                     in.next();
                 }
@@ -107,15 +101,7 @@ public class ConsoleUI {
 
         publicationDate = InputValidator.promptAndParseDate("Enter publication date (dd-MM-yyyy): ");
 
-        if (input == 1) {
-            int number = InputValidator.promptAndParseInt("Enter book number: ");
-            doc = new Book(title, author, publicationDate, pageNumbers, number);
-        } else {
-            int number = InputValidator.promptAndParseInt("Enter ISBN number: ");
-            doc = new Magazine(title, author, publicationDate, pageNumbers, number);
-        }
-
-        lib.addDocument(doc);
+        // lib.addDocument(doc);
 
         System.out.print("Press Enter key to continue...");
         in.next();
@@ -151,7 +137,7 @@ public class ConsoleUI {
 
         // Get the selected doc by its id
         Document selectedDoc = filteredDocuments.stream().filter(doc -> doc.getId() == input).findFirst().get();
-        lib.borrowDocument(selectedDoc);
+        // lib.borrowDocument(selectedDoc);
         System.out.print("Document been borrowed successfully ");
         in.next();
     }
@@ -179,7 +165,7 @@ public class ConsoleUI {
 
         // Get the selected doc by its id
         Document selectedDoc = filteredDocuments.stream().filter(doc -> doc.getId() == input).findFirst().get();
-        lib.borrowDocument(selectedDoc);
+        // lib.borrowDocument(selectedDoc);
         System.out.print("Document been returned successfully ");
         in.next();
     }

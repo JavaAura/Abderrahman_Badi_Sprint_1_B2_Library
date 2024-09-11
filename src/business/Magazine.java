@@ -9,8 +9,8 @@ public class Magazine extends Document {
     public Magazine() {
     }
 
-    public Magazine(String name, String author, LocalDate publicationDate, int pageNumbers, int isbn) {
-        super(name, author, publicationDate, pageNumbers);
+    public Magazine(int id, String name, String author, LocalDate publicationDate, int pageNumbers, int isbn) {
+        super(id ,name, author, publicationDate, pageNumbers);
         this.isbn = isbn;
     }
 

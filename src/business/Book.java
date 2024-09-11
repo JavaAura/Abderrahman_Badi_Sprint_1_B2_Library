@@ -9,8 +9,8 @@ public class Book extends Document {
     public Book() {
     }
 
-    public Book(String name, String author, LocalDate publicationDate, int pageNumbers, int number) {
-        super(name, author, publicationDate, pageNumbers);
+    public Book(int id, String name, String author, LocalDate publicationDate, int pageNumbers, int number) {
+        super(id, name, author, publicationDate, pageNumbers);
         this.number = number;
     }
 

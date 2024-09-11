@@ -3,7 +3,6 @@ package src.business;
 import java.time.LocalDate;
 
 abstract public class Document {
-    private static int nextId = 1;
     private int id;
     private String title;
     private String author;
@@ -12,11 +11,10 @@ abstract public class Document {
     private boolean isBorrowed = false;
 
     public Document() {
-        this.id = nextId++;
     }
 
-    public Document(String title, String author, LocalDate publicationDate, int pageNumbers) {
-        this.id = nextId++;
+    public Document(int id, String title, String author, LocalDate publicationDate, int pageNumbers) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.publicationDate = publicationDate;
