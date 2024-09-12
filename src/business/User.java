@@ -1,7 +1,7 @@
 package src.business;
 
 public class User {
-    private int id;
+    private long id;
     private String name;
     private String lastName;
     private String registrationNumber;
@@ -10,14 +10,14 @@ public class User {
 
     }
 
-    public User(int id, String name, String lastName, String registrationNumber) {
+    public User(long id, String name, String lastName, String registrationNumber) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.registrationNumber = registrationNumber;
     }
 
-    public int getId() {
+    public long getId() {
       return this.id;
     }
     public void setId(int value) {

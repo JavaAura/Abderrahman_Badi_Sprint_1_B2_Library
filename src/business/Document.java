@@ -2,8 +2,11 @@ package src.business;
 
 import java.time.LocalDate;
 
-abstract public class Document {
-    private int id;
+import src.business.interfaces.Borrowable;
+import src.business.interfaces.Reservable;
+
+abstract public class Document implements Borrowable, Reservable {
+    private long id;
     private String title;
     private String author;
     private LocalDate publicationDate;
@@ -13,7 +16,7 @@ abstract public class Document {
     public Document() {
     }
 
-    public Document(int id, String title, String author, LocalDate publicationDate, int pageNumbers) {
+    public Document(long id, String title, String author, LocalDate publicationDate, int pageNumbers) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -22,10 +25,11 @@ abstract public class Document {
     }
 
     public abstract void showDetails();
+    
 
     // --------------- Getters / Setters -----------------------
 
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 

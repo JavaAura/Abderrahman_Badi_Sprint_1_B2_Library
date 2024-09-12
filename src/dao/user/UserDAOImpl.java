@@ -1,23 +1,26 @@
 package src.dao.user;
 
-import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import src.business.User;
 import src.dao.interfaces.UserDAO;
 
 public class UserDAOImpl implements UserDAO {
-    private HashMap<Long, User> users = new HashMap<>();
+    private List<User> users = new ArrayList<>();
+
+    @Override
+    public List<User> getAll() {
+
+        return users;
+    }
+
+    /* ----------------- UNSEUPPORTED METHODS ----------------- */
 
     @Override
     public Optional<User> get(long id) {
         throw new UnsupportedOperationException("Get operation is not supported in UserDAOImpl.");
-    }
-
-    @Override
-    public HashMap<Long, User> getAll() {
-
-        return users;
     }
 
     @Override

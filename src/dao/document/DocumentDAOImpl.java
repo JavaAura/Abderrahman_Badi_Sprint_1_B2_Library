@@ -1,22 +1,25 @@
 package src.dao.document;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import src.business.Document;
 import src.dao.interfaces.DocumentDAO;
 
 public class DocumentDAOImpl implements DocumentDAO {
-    private HashMap<Long, Document> documents = new HashMap<>();
+    private List<Document> documentsList = new ArrayList<>();
+
+    @Override
+    public List<Document> getAll() {
+        return documentsList;
+    }
+
+    /* ----------------- UNSEUPPORTED METHODS ----------------- */
 
     @Override
     public Optional<Document> get(long id) {
         throw new UnsupportedOperationException("Get operation is not supported in DocumentDAOImpl.");
-    }
-
-    @Override
-    public HashMap<Long, Document> getAll() {
-        return documents;
     }
 
     public void save(Document document) {

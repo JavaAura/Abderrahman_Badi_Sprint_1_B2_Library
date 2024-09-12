@@ -14,7 +14,6 @@ public class Book extends Document {
         this.number = number;
     }
 
-
     @Override
     public void showDetails() {
         System.out.println("\n Book Details:");
@@ -26,6 +25,31 @@ public class Book extends Document {
         System.out.println("\n\t Book Number: " + this.number);
     }
 
+    
+    @Override
+    public void reserveDocument() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'reserveDocument'");
+    }
+
+    @Override
+    public void cancelReservation() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'cancelReservation'");
+    }
+
+    @Override
+    public void borrowDocument() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'borrowDocument'");
+    }
+
+    @Override
+    public void returnDocument() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'returnDocument'");
+    }
+
     // --------------- Getters / Setters -----------------------
 
     public int getNumber() {
@@ -35,4 +59,5 @@ public class Book extends Document {
     public void setNumber(int value) {
         this.number = value;
     }
+
 }

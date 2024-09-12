@@ -1,14 +1,15 @@
 package src.dao.document;
 
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import src.business.Book;
 import src.dao.interfaces.BookDAO;
 
 public class BookDAOImpl implements BookDAO {
-    private HashMap<Long, Book> books = new HashMap<>();
+    private List<Book> books = new ArrayList<>();
 
     @Override
     public Optional<Book> get(long id) {
@@ -16,7 +17,7 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public HashMap<Long, Book> getAll() {
+    public List<Book> getAll() {
 
         return books;
     }

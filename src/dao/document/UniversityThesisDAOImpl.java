@@ -1,6 +1,7 @@
 package src.dao.document;
 
-import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import src.business.UniversityThesis;
@@ -8,7 +9,7 @@ import src.dao.interfaces.UniversityThesisDAO;
 
 public class UniversityThesisDAOImpl implements UniversityThesisDAO {
 
-    private HashMap<Long, UniversityThesis> thesis = new HashMap<>();
+    private List<UniversityThesis> thesis = new ArrayList<>();
 
     @Override
     public Optional<UniversityThesis> get(long id) {
@@ -16,7 +17,7 @@ public class UniversityThesisDAOImpl implements UniversityThesisDAO {
     }
 
     @Override
-    public HashMap<Long, UniversityThesis> getAll() {
+    public List<UniversityThesis> getAll() {
 
         return thesis;
     }

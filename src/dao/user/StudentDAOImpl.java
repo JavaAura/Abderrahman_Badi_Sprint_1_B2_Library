@@ -1,13 +1,14 @@
 package src.dao.user;
 
-import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import src.business.Student;
 import src.dao.interfaces.StudentDAO;
 
 public class StudentDAOImpl implements StudentDAO {
-    private HashMap<Long, Student> students = new HashMap<>();
+    private List<Student> students = new ArrayList<>();
 
     @Override
     public Optional<Student> get(long id) {
@@ -15,7 +16,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public HashMap<Long, Student> getAll() {
+    public List<Student> getAll() {
 
         return students;
     }
