@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import src.business.Document;
 import src.business.Reservation;
+import src.business.User;
 import src.dao.interfaces.ReservationDAO;
 
 public class ReservationDAOImpl implements ReservationDAO {
@@ -22,8 +24,9 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     @Override
-    public void save(Reservation reservation) {
-
+    public void saveReservation(Document document, User user) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'cancelReservation'");
     }
 
     @Override
@@ -44,9 +47,13 @@ public class ReservationDAOImpl implements ReservationDAO {
         throw new UnsupportedOperationException("Unimplemented method 'returnDocument'");
     }
 
-
-
     /* ----------------- UNSEUPPORTED METHODS ----------------- */
+
+    @Override
+    public void save(Reservation reservation) {
+        throw new UnsupportedOperationException("Save operation is not supported in ReservationDAOImpl.");
+    }
+
     @Override
     public void update(Reservation reservation, String[] params) {
         throw new UnsupportedOperationException("Update operation is not supported in ReservationDAOImpl.");

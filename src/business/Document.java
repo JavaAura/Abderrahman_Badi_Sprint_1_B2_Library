@@ -2,16 +2,12 @@ package src.business;
 
 import java.time.LocalDate;
 
-import src.business.interfaces.Borrowable;
-import src.business.interfaces.Reservable;
-
-abstract public class Document implements Borrowable, Reservable {
+abstract public class Document {
     private long id;
     private String title;
     private String author;
     private LocalDate publicationDate;
     private int pageNumbers;
-    private boolean isBorrowed = false;
 
     public Document() {
     }
@@ -67,13 +63,5 @@ abstract public class Document implements Borrowable, Reservable {
 
     public void setPageNumbers(int value) {
         this.pageNumbers = value;
-    }
-
-    public boolean getIsBorrowed() {
-        return this.isBorrowed;
-    }
-
-    public void setIsBorrowed(boolean value) {
-        this.isBorrowed = value;
     }
 }
