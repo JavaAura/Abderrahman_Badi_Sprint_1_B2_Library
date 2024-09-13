@@ -1,4 +1,4 @@
-package src.dao.user;
+package src.services.user;
 
 import java.util.List;
 import java.util.ArrayList;

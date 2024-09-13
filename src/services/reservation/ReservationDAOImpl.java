@@ -1,4 +1,4 @@
-package src.dao.reservation;
+package src.services.reservation;
 
 import java.util.ArrayList;
 import java.util.List;

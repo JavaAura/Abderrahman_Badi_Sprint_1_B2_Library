@@ -1,4 +1,4 @@
-package src.dao.document;
+package src.services.document;
 
 
 import java.util.ArrayList;
