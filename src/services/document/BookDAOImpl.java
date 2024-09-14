@@ -13,7 +13,10 @@ import src.business.Book;
 import src.dao.interfaces.BookDAO;
 
 public class BookDAOImpl implements BookDAO {
-    private List<Book> books = new ArrayList<>();
+    private static final String SQL_FIND_BY_ID = "SELECT * FROM public.book WHERE id = ?";
+    private static final String SQL_LIST = "SELECT * FROM public.book WHERE is_deleted = false";
+    private static final String SQL_INSERT = "INSERT INTO public.book(title, author, publication_date, page_numbers, \"number\") VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE public.book SET title=?, author=?, publication_date=?, page_numbers=?, \"number\"=? WHERE id = ?;";
 
     @Override
     public Optional<Book> get(long id) {
@@ -22,7 +25,7 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public List<Book> getAll() {
-
+        List<Book> books = new ArrayList<>();
         return books;
     }
 

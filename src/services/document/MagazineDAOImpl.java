@@ -13,7 +13,10 @@ import src.business.Magazine;
 import src.dao.interfaces.MagazineDAO;
 
 public class MagazineDAOImpl implements MagazineDAO {
-    private List<Magazine> magazines = new ArrayList<>();
+    private static final String SQL_FIND_BY_ID = "SELECT * FROM public.magazine WHERE id = ?";
+    private static final String SQL_LIST = "SELECT * FROM public.magazine WHERE is_deleted = false";
+    private static final String SQL_INSERT = "INSERT INTO public.magazine(title, author, publication_date, page_numbers, isbn) VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE public.magazine SET title=?, author=?, publication_date=?, page_numbers=?, isbn=? WHERE id = ?;";
 
     @Override
     public Optional<Magazine> get(long id) {
@@ -22,7 +25,7 @@ public class MagazineDAOImpl implements MagazineDAO {
 
     @Override
     public List<Magazine> getAll() {
-
+        List<Magazine> magazines = new ArrayList<>();
         return magazines;
     }
 

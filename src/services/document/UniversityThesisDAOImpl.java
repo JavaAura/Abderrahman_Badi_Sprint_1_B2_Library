@@ -13,8 +13,10 @@ import src.business.UniversityThesis;
 import src.dao.interfaces.UniversityThesisDAO;
 
 public class UniversityThesisDAOImpl implements UniversityThesisDAO {
-
-    private List<UniversityThesis> thesis = new ArrayList<>();
+    private static final String SQL_FIND_BY_ID = "SELECT * FROM FROM public.university_thesis WHERE id = ?";
+    private static final String SQL_LIST = "SELECT * FROM FROM public.university_thesis WHERE is_deleted = false";
+    private static final String SQL_INSERT = "INSERT INTO FROM public.university_thesis(title, author, publication_date, page_numbers, field) VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE FROM public.university_thesis SET title=?, author=?, publication_date=?, page_numbers=?, field=? WHERE id = ?;";
 
     @Override
     public Optional<UniversityThesis> get(long id) {
@@ -23,7 +25,7 @@ public class UniversityThesisDAOImpl implements UniversityThesisDAO {
 
     @Override
     public List<UniversityThesis> getAll() {
-
+        List<UniversityThesis> thesis = new ArrayList<>();
         return thesis;
     }
 

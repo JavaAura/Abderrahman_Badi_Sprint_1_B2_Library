@@ -13,7 +13,10 @@ import src.business.ScientificJournal;
 import src.dao.interfaces.ScientificJournalDAO;
 
 public class ScientificJournalDAOImpl implements ScientificJournalDAO {
-    private List<ScientificJournal> journals = new ArrayList<>();
+    private static final String SQL_FIND_BY_ID = "SELECT * FROM public.scientific_journal WHERE id = ?";
+    private static final String SQL_LIST = "SELECT * FROM public.scientific_journal WHERE is_deleted = false";
+    private static final String SQL_INSERT = "INSERT INTO public.scientific_journal(title, author, publication_date, page_numbers, field) VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE public.scientific_journal SET title=?, author=?, publication_date=?, page_numbers=?, field=? WHERE id = ?;";
 
     @Override
     public Optional<ScientificJournal> get(long id) {
@@ -22,7 +25,7 @@ public class ScientificJournalDAOImpl implements ScientificJournalDAO {
 
     @Override
     public List<ScientificJournal> getAll() {
-
+        List<ScientificJournal> journals = new ArrayList<>();
         return journals;
     }
 
