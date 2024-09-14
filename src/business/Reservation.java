@@ -13,8 +13,12 @@ public class Reservation {
     private long documentId;
     private long userId;
 
-    public Reservation(long id, boolean isBorrowed, LocalDate returnDate, long documentId, long userId) {
+    public Reservation(long id, LocalDate reservationDate, Status reservationStatus, boolean isBorrowed,
+            LocalDate returnDate, long documentId,
+            long userId) {
         this.id = id;
+        this.reservationDate = reservationDate;
+        this.reservationStatus = reservationStatus;
         this.documentId = documentId;
         this.userId = userId;
         this.isBorrowed = isBorrowed;

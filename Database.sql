@@ -1,3 +1,7 @@
+CREATE DATABASE library;
+
+USE library;
+
 CREATE TABLE document
 (
     id SERIAL PRIMARY KEY,

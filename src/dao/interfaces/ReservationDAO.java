@@ -8,10 +8,10 @@ public interface ReservationDAO extends DAO<Reservation>{
 
     void saveReservation(Document document, User user);
 
-    void cancelReservation(long id);
+    void cancelReservation(Reservation reservation);
 
-    void borrowDocument(long id);
+    void borrowDocument(Reservation reservation);
 
-    void returnDocument(long id);
+    void returnDocument(Reservation reservation);
 
 }

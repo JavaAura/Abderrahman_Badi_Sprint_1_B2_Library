@@ -1,8 +1,9 @@
 package src.business.interfaces;
 
+import src.business.Reservation;
 
 public interface Borrowable {
-    void borrowDocument(long id);
+    void borrowDocument(Reservation reservation);
 
-    void returnDocument(long id);
+    void returnDocument(Reservation reservation);
 }

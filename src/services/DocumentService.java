@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import src.business.Document;
+import src.business.Reservation;
 import src.business.User;
 import src.business.interfaces.Borrowable;
 import src.business.interfaces.Reservable;
@@ -24,18 +25,18 @@ public class DocumentService implements Borrowable, Reservable {
     }
 
     @Override
-    public void cancelReservation(long id) {
-        reservationDAO.cancelReservation(id);
+    public void cancelReservation(Reservation reservation) {
+        reservationDAO.cancelReservation(reservation);
     }
 
     @Override
-    public void borrowDocument(long id) {
-        reservationDAO.borrowDocument(id);
+    public void borrowDocument(Reservation reservation) {
+        reservationDAO.borrowDocument(reservation);
     }
 
     @Override
-    public void returnDocument(long id) {
-        reservationDAO.returnDocument(id);
+    public void returnDocument(Reservation reservation) {
+        reservationDAO.returnDocument(reservation);
     }
     
 }
