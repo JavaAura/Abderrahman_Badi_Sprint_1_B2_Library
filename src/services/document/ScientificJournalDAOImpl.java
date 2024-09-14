@@ -38,6 +38,6 @@ public class ScientificJournalDAOImpl implements ScientificJournalDAO {
 
     @Override
     public void delete(ScientificJournal journal) {
-
+        throw new UnsupportedOperationException("Delete operation is not supported.");
     }
 }

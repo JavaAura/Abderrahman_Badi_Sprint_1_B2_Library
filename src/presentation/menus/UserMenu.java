@@ -10,7 +10,7 @@ import src.dao.interfaces.ProfessorDAO;
 import src.dao.interfaces.StudentDAO;
 import src.dao.interfaces.UserDAO;
 import src.presentation.interfaces.Menu;
-import src.presentation.user.UserInterfaces;
+import src.presentation.user.UserInterface;
 import src.services.user.ProfessorDAOImpl;
 import src.services.user.StudentDAOImpl;
 import src.services.user.UserDAOImpl;
@@ -62,13 +62,13 @@ public class UserMenu implements Menu {
         switch (choice) {
             case 1:
                 List<User> users = userDAO.getAll();
-                UserInterfaces.UserList(users);
+                UserInterface.UserList(users);
                 in.next();
                 break;
             case 2:
 
                 List<Student> students = studentDAO.getAll();
-                UserInterfaces.StudentList(students);
+                UserInterface.StudentList(students);
 
                 Student selectedStudent = null;
 
@@ -94,13 +94,13 @@ public class UserMenu implements Menu {
                     }
                 } while (selectedStudent == null);
 
-                UserInterfaces.ShowDetails(selectedStudent, userDAO, studentDAO, professorDAO);
+                UserInterface.ShowDetails(selectedStudent, userDAO, studentDAO, professorDAO);
 
                 break;
             case 3:
 
                 List<Professor> professors = professorDAO.getAll();
-                UserInterfaces.ProfessorList(professors);
+                UserInterface.ProfessorList(professors);
 
                 Professor selectedProfessor = null;
 
@@ -126,7 +126,7 @@ public class UserMenu implements Menu {
                     }
                 } while (selectedProfessor == null);
 
-                UserInterfaces.ShowDetails(selectedProfessor, userDAO, studentDAO, professorDAO);
+                UserInterface.ShowDetails(selectedProfessor, userDAO, studentDAO, professorDAO);
 
                 break;
             case 4:

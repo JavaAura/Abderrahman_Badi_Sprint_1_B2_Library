@@ -10,10 +10,9 @@ import src.dao.interfaces.ProfessorDAO;
 import src.dao.interfaces.StudentDAO;
 import src.dao.interfaces.UserDAO;
 
-import src.services.user.UserDAOImpl;
 import src.utils.InputValidator;
 
-public class UserInterfaces {
+public class UserInterface {
 
         public static Scanner in = new Scanner(System.in).useDelimiter(System.lineSeparator());
 

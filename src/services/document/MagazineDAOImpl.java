@@ -38,6 +38,6 @@ public class MagazineDAOImpl implements MagazineDAO {
 
     @Override
     public void delete(Magazine magazine) {
-
+        throw new UnsupportedOperationException("Delete operation is not supported.");
     }
 }

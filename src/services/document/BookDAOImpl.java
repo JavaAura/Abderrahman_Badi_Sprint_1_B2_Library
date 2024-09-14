@@ -38,6 +38,6 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public void delete(Book book) {
-
+        throw new UnsupportedOperationException("Delete operation is not supported.");
     }
 }

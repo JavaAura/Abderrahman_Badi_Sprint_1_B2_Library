@@ -39,7 +39,6 @@ public class UniversityThesisDAOImpl implements UniversityThesisDAO {
 
     @Override
     public void delete(UniversityThesis thesis) {
-
+        throw new UnsupportedOperationException("Delete operation is not supported.");
     }
-
 }

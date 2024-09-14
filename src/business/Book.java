@@ -10,6 +10,10 @@ import java.time.LocalDate;
         public Book() {
         }
 
+        public Book(long id, String name, String author, LocalDate publicationDate, int pageNumbers) {
+            super(id, name, author, publicationDate, pageNumbers);
+        }
+
         public Book(long id, String name, String author, LocalDate publicationDate, int pageNumbers, int number) {
             super(id, name, author, publicationDate, pageNumbers);
             this.number = number;
