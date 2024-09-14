@@ -8,6 +8,7 @@ abstract public class Document {
     private String author;
     private LocalDate publicationDate;
     private int pageNumbers;
+    private Boolean isDeleted;
 
     public Document() {
     }
@@ -63,5 +64,12 @@ abstract public class Document {
 
     public void setPageNumbers(int value) {
         this.pageNumbers = value;
+    }
+
+    public Boolean getIsDeleted() {
+      return this.isDeleted;
+    }
+    public void setIsDeleted(Boolean value) {
+      this.isDeleted = value;
     }
 }

@@ -16,10 +16,9 @@ import src.db.DatabaseConnection;
 public class ProfessorDAOImpl implements ProfessorDAO {
 
     private static final String SQL_FIND_BY_ID = "SELECT * FROM public.professor WHERE id = ?";
-    private static final String SQL_LIST = "SELECT * FROM public.professor";
+    private static final String SQL_LIST = "SELECT * FROM public.professor WHERE is_deleted = false";
     private static final String SQL_INSERT = "INSERT INTO public.professor(name, last_name, registration_number, department) VALUES (?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE public.professor SET name=?, last_name=?, registration_number=?, department=? WHERE id = ?;";
-    private static final String SQL_DELETE = "DELETE FROM public.professor WHERE id = ?";
 
     @Override
     public Optional<Professor> get(long id) {
@@ -116,18 +115,6 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 
     @Override
     public void delete(Professor professor) {
-        try {
-            Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_DELETE);
-            statement.setLong(1, professor.getId());
-
-            statement.executeUpdate();
-            connection.close();
-
-            System.out.println("Professor deleted successfully!");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        throw new UnsupportedOperationException("Get operation is not supported.");
     }
 }

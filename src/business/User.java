@@ -5,6 +5,7 @@ public abstract class User {
   private String name;
   private String lastName;
   private String registrationNumber;
+  private Boolean isDeleted;
 
   public User() {
 
@@ -58,4 +59,11 @@ public abstract class User {
   public void setRegistrationNumber(String value) {
     this.registrationNumber = value;
   }
+
+    public Boolean getIsDeleted() {
+      return this.isDeleted;
+    }
+    public void setIsDeleted(Boolean value) {
+      this.isDeleted = value;
+    }
 }

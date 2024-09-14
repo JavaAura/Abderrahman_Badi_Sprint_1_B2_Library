@@ -16,10 +16,9 @@ import src.db.DatabaseConnection;
 public class StudentDAOImpl implements StudentDAO {
     
     private static final String SQL_FIND_BY_ID = "SELECT * FROM public.student WHERE id = ?";
-    private static final String SQL_LIST = "SELECT * FROM public.student";
+    private static final String SQL_LIST = "SELECT * FROM public.student WHERE is_deleted = false";
     private static final String SQL_INSERT = "INSERT INTO public.student(name, last_name, registration_number, grade, major) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE public.student SET name=?, last_name=?, registration_number=?, grade=?, major=? WHERE id = ?;";
-    private static final String SQL_DELETE = "DELETE FROM public.student WHERE id = ?";
 
     @Override
     public Optional<Student> get(long id) {
@@ -124,18 +123,6 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public void delete(Student student) {
-        try {
-            Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_DELETE);
-            statement.setLong(1, student.getId());
-
-            statement.executeUpdate();
-            connection.close();
-
-            System.out.println("Student deleted successfully!");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        throw new UnsupportedOperationException("Get operation is not supported.");
     }
 }

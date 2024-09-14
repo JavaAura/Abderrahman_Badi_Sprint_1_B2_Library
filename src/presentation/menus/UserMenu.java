@@ -94,7 +94,7 @@ public class UserMenu implements Menu {
                     }
                 } while (selectedStudent == null);
 
-                UserInterfaces.ShowDetails(selectedStudent);
+                UserInterfaces.ShowDetails(selectedStudent, userDAO, studentDAO, professorDAO);
 
                 break;
             case 3:
@@ -126,11 +126,14 @@ public class UserMenu implements Menu {
                     }
                 } while (selectedProfessor == null);
 
-                UserInterfaces.ShowDetails(selectedProfessor);
+                UserInterfaces.ShowDetails(selectedProfessor, userDAO, studentDAO, professorDAO);
+
                 break;
             case 4:
                 int selectedChoice = InputValidator
-                        .promptAndParseInt("What would you like to add ?\n 1- Student \t\t 2- Professor\nPick your choice : ", 1, 2);
+                        .promptAndParseInt(
+                                "What would you like to add ?\n 1- Student \t\t 2- Professor\nPick your choice : ", 1,
+                                2);
                 String name = InputValidator.promptAndParseString("Name : ");
                 String lastName = InputValidator.promptAndParseString("Last Name : ");
                 String registrationNumber = InputValidator.promptAndParseString("Registration Number : ");

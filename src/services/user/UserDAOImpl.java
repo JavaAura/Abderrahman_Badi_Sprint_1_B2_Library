@@ -16,11 +16,12 @@ import src.db.DatabaseConnection;
 
 public class UserDAOImpl implements UserDAO {
 
-    private static final String SQL_LIST = "SELECT * FROM public.\"user\" ORDER BY id ASC";
+    private static final String SQL_LIST = "SELECT * FROM public.\"user\" WHERE is_deleted = false ORDER BY id ASC";
+    private static final String SQL_DELETE = "UPDATE public.user SET is_deleted = ? WHERE id = ?;";
 
     @Override
     public List<User> getAll() {
-        List<User> users = new ArrayList<>();
+        List<User> users = new ArrayList<>(); 
 
         try {
             Connection connection = DatabaseConnection.getConnection();
@@ -44,6 +45,26 @@ public class UserDAOImpl implements UserDAO {
         return users;
     }
 
+    @Override
+    public void delete(User user) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_DELETE);
+
+            statement.setBoolean(1, true);
+
+            statement.setLong(2, user.getId());
+
+            statement.executeUpdate();
+            connection.close();
+
+            System.out.println("User deleted successfully!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /* ----------------- UNSEUPPORTED METHODS ----------------- */
 
     @Override
@@ -59,10 +80,5 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void update(User user, String[] params) {
         throw new UnsupportedOperationException("Update operation is not supported in UserDAOImpl.");
-    }
-
-    @Override
-    public void delete(User user) {
-        throw new UnsupportedOperationException("Delete operation is not supported in UserDAOImpl.");
     }
 }

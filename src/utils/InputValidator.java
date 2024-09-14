@@ -66,6 +66,15 @@ public final class InputValidator {
         } while (true);
     }
 
+    public static String promptAndParseNullableString(String message) {
+        do {
+            System.out.print(message);
+            String input = in.next();
+            return input;
+        } while (true);
+
+    }
+
     public static LocalDate promptAndParseDate(String message) {
         do {
             try {
