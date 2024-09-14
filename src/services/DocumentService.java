@@ -1,5 +1,10 @@
 package src.services;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import src.business.Document;
 import src.business.User;
 import src.business.interfaces.Borrowable;

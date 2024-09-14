@@ -31,20 +31,17 @@ public class MainMenu implements Menu {
 
     @Override
     public int getChoice() {
-        int input;
-        do {
-            try {
-                input = in.nextInt();
-                if (input < 1 || input > 3) {
-                    System.out.println("Please pick a choice between 1 and 3...");
-                    in.next();
-                }
-            } catch (Exception e) {
-                System.out.println("Please pick a valid number...");
+        int input = -1;
+        try {
+            input = in.nextInt();
+            if (input < 1 || input > 3) {
+                System.out.println("Please pick a choice between 1 and 3...");
                 in.next();
-                input = 0;
             }
-        } while (input < 1 || input > 3);
+        } catch (Exception e) {
+            System.out.println("Please pick a valid number...");
+            in.next();
+        }
         return input;
     }
 
@@ -66,15 +63,21 @@ public class MainMenu implements Menu {
     }
 
     private void userMenuLoop() {
-        userMenu.display();
-        int choice = userMenu.getChoice();
-        userMenu.handleChoice(choice);
+        int choice;
+        do {
+            userMenu.display();
+            choice = userMenu.getChoice();
+            userMenu.handleChoice(choice);
+        } while (choice != 5);
     }
 
     private void documentMenuLoop() {
-        documentMenu.display();
-        int choice = documentMenu.getChoice();
-        documentMenu.handleChoice(choice);
+        int choice;
+        do {
+            documentMenu.display();
+            choice = documentMenu.getChoice();
+            documentMenu.handleChoice(choice);
+        } while (choice != 4);
     }
 
 }

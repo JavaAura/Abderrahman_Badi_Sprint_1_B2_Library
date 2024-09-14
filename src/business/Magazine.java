@@ -9,7 +9,7 @@ public class Magazine extends Document {
     public Magazine() {
     }
 
-    public Magazine(int id, String name, String author, LocalDate publicationDate, int pageNumbers, int isbn) {
+    public Magazine(long id, String name, String author, LocalDate publicationDate, int pageNumbers, int isbn) {
         super(id ,name, author, publicationDate, pageNumbers);
         this.isbn = isbn;
     }

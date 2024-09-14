@@ -4,14 +4,42 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import src.business.User;
+import src.business.Student;
 import src.dao.interfaces.UserDAO;
+import src.db.DatabaseConnection;
 
 public class UserDAOImpl implements UserDAO {
-    private List<User> users = new ArrayList<>();
+
+    private static final String SQL_LIST = "SELECT * FROM public.\"user\" ORDER BY id ASC";
 
     @Override
     public List<User> getAll() {
+        List<User> users = new ArrayList<>();
+
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_LIST);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String lastName = resultSet.getString("last_name");
+                String registrationNumber = resultSet.getString("registration_number");
+
+                Student user = new Student(id, name, lastName, registrationNumber);
+                users.add(user);
+
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving users: " + e.getMessage());
+        }
 
         return users;
     }

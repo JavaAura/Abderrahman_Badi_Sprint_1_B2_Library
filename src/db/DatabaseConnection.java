@@ -18,7 +18,6 @@ public class DatabaseConnection {
         try {
             Class.forName("org.postgresql.Driver");
             this.connection = DriverManager.getConnection(url, user, password);
-            System.out.println("Database connection established successfully.");
 
         } catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC Driver not found: " + e.getMessage());

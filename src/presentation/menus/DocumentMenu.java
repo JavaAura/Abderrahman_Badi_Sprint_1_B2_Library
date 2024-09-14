@@ -24,20 +24,17 @@ public class DocumentMenu implements Menu {
 
     @Override
     public int getChoice() {
-        int input;
-        do {
-            try {
-                input = in.nextInt();
-                if (input < 1 || input > 4) {
-                    System.out.println("Please pick a choice between 1 and 4...");
-                    in.next();
-                }
-            } catch (Exception e) {
-                System.out.println("Please pick a valid number...");
+        int input = -1;
+        try {
+            input = in.nextInt();
+            if (input < 1 || input > 4) {
+                System.out.println("Please pick a choice between 1 and 4...");
                 in.next();
-                input = 0;
             }
-        } while (input < 1 || input > 4);
+        } catch (Exception e) {
+            System.out.println("Please pick a valid number...");
+            in.next();
+        }
         return input;
     }
 
@@ -54,7 +51,6 @@ public class DocumentMenu implements Menu {
                 // Manage Reservations
                 break;
             case 4:
-                // Back to Main Menu
                 break;
             default:
                 break;

@@ -9,7 +9,7 @@ public class UniversityThesis extends Document {
 
     }
 
-    public UniversityThesis(int id, String name, String author, LocalDate publicationDate, int pageNumbers,
+    public UniversityThesis(long id, String name, String author, LocalDate publicationDate, int pageNumbers,
             String field) {
         super(id, name, author, publicationDate, pageNumbers);
         this.field = field;

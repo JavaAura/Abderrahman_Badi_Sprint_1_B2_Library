@@ -10,7 +10,7 @@ import java.time.LocalDate;
         public Book() {
         }
 
-        public Book(int id, String name, String author, LocalDate publicationDate, int pageNumbers, int number) {
+        public Book(long id, String name, String author, LocalDate publicationDate, int pageNumbers, int number) {
             super(id, name, author, publicationDate, pageNumbers);
             this.number = number;
         }
