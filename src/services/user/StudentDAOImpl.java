@@ -39,8 +39,6 @@ public class StudentDAOImpl implements StudentDAO {
                         resultSet.getString("major"));
             }
 
-            resultSet.close();
-            statement.close();
             connection.close();
 
         } catch (SQLException e) {
