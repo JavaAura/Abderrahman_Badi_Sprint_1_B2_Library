@@ -17,6 +17,12 @@ public abstract class User {
     this.registrationNumber = registrationNumber;
   }
 
+  public User(String name, String lastName, String registrationNumber) {
+    this.name = name;
+    this.lastName = lastName;
+    this.registrationNumber = registrationNumber;
+  }
+
   public abstract void showDetails();
 
   // --------------- Getters / Setters -----------------------

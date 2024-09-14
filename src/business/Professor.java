@@ -7,6 +7,11 @@ public class Professor extends User {
 
   }
 
+  public Professor(String name, String lastName, String registrationNumber, String department) {
+    super(name, lastName, registrationNumber);
+    this.department = department;
+  }
+
   public Professor(long id, String name, String lastName, String registrationNumber, String department) {
     super(id, name, lastName, registrationNumber);
     this.department = department;

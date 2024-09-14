@@ -85,6 +85,7 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 
             statement.executeUpdate();
             connection.close();
+            System.out.println("Professor created successfully!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -105,6 +106,9 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 
             statement.executeUpdate();
             connection.close();
+
+            System.out.println("Professor updated successfully!");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -119,6 +123,9 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 
             statement.executeUpdate();
             connection.close();
+
+            System.out.println("Professor deleted successfully!");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

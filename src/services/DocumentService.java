@@ -26,19 +26,16 @@ public class DocumentService implements Borrowable, Reservable {
     @Override
     public void cancelReservation(long id) {
         reservationDAO.cancelReservation(id);
-        throw new UnsupportedOperationException("Unimplemented method 'cancelReservation'");
     }
 
     @Override
     public void borrowDocument(long id) {
         reservationDAO.borrowDocument(id);
-        throw new UnsupportedOperationException("Unimplemented method 'borrowDocument'");
     }
 
     @Override
     public void returnDocument(long id) {
         reservationDAO.returnDocument(id);
-        throw new UnsupportedOperationException("Unimplemented method 'returnDocument'");
     }
     
 }

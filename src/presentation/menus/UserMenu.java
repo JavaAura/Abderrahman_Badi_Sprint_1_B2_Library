@@ -14,8 +14,14 @@ import src.presentation.user.UserInterfaces;
 import src.services.user.ProfessorDAOImpl;
 import src.services.user.StudentDAOImpl;
 import src.services.user.UserDAOImpl;
+import src.utils.InputValidator;
 
 public class UserMenu implements Menu {
+
+    UserDAO userDAO = new UserDAOImpl();
+    StudentDAO studentDAO = new StudentDAOImpl();
+    ProfessorDAO professorDAO = new ProfessorDAOImpl();
+
     Scanner in = new Scanner(System.in).useDelimiter(System.lineSeparator());
     int selectedId = -1;
 
@@ -55,14 +61,12 @@ public class UserMenu implements Menu {
     public void handleChoice(int choice) {
         switch (choice) {
             case 1:
-                UserDAO userDAO = new UserDAOImpl();
                 List<User> users = userDAO.getAll();
                 UserInterfaces.UserList(users);
                 in.next();
                 break;
             case 2:
 
-                StudentDAO studentDAO = new StudentDAOImpl();
                 List<Student> students = studentDAO.getAll();
                 UserInterfaces.StudentList(students);
 
@@ -95,7 +99,6 @@ public class UserMenu implements Menu {
                 break;
             case 3:
 
-                ProfessorDAO professorDAO = new ProfessorDAOImpl();
                 List<Professor> professors = professorDAO.getAll();
                 UserInterfaces.ProfessorList(professors);
 
@@ -126,7 +129,24 @@ public class UserMenu implements Menu {
                 UserInterfaces.ShowDetails(selectedProfessor);
                 break;
             case 4:
-                // Add a User
+                int selectedChoice = InputValidator
+                        .promptAndParseInt("What would you like to add ?\n 1- Student \t\t 2- Professor\nPick your choice : ", 1, 2);
+                String name = InputValidator.promptAndParseString("Name : ");
+                String lastName = InputValidator.promptAndParseString("Last Name : ");
+                String registrationNumber = InputValidator.promptAndParseString("Registration Number : ");
+                if (selectedChoice == 1) {
+                    String major = InputValidator.promptAndParseString("Major : ");
+                    String grade = InputValidator.promptAndParseString("Class : ");
+
+                    Student newStudent = new Student(name, lastName, registrationNumber, major, grade);
+                    studentDAO.save(newStudent);
+                } else {
+                    String department = InputValidator.promptAndParseString("Department : ");
+                    Professor newProfessor = new Professor(name, lastName, registrationNumber, department);
+                    professorDAO.save(newProfessor);
+                }
+
+                in.next();
                 break;
             case 5:
                 break;

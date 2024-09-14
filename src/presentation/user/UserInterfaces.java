@@ -43,14 +43,14 @@ public class UserInterfaces {
         System.out.println(
                 "+-------------------------------------------------------------------------------------------------------------+");
         System.out.println(
-                "| Id |        Name        |         Last Name        |       Registration Number       |      Department      |");
+                "| Id |        Name        |         Last Name        |      Department      |       Registration Number       |");
         System.out.println(
                 "+-------------------------------------------------------------------------------------------------------------+");
         for (Professor professor : professors) {
-            System.out.printf("| %-3d| %-18s | %-24s | %-31s | %-20 |\n", professor.getId(), professor.getName(),
+            System.out.printf("| %-3d| %-18s | %-24s | %-20s | %-31s |\n", professor.getId(), professor.getName(),
                     professor.getLastName(),
-                    professor.getRegistrationNumber(),
-                    professor.getDepartment());
+                    professor.getDepartment(),
+                    professor.getRegistrationNumber());
             System.out.println(
                     "+-------------------------------------------------------------------------------------------------------------+");
         }

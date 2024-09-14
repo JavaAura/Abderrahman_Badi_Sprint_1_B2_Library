@@ -91,6 +91,8 @@ public class StudentDAOImpl implements StudentDAO {
             statement.executeUpdate();
             connection.close();
 
+            System.out.println("Student created successfully!");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -113,6 +115,8 @@ public class StudentDAOImpl implements StudentDAO {
             statement.executeUpdate();
             connection.close();
 
+            System.out.println("Student updated successfully!");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -127,6 +131,8 @@ public class StudentDAOImpl implements StudentDAO {
 
             statement.executeUpdate();
             connection.close();
+
+            System.out.println("Student deleted successfully!");
 
         } catch (SQLException e) {
             e.printStackTrace();
