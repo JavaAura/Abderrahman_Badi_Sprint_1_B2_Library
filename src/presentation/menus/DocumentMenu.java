@@ -71,7 +71,7 @@ public class DocumentMenu implements Menu {
             case 1:
                 List<Document> documents = documentDAO.getAll();
                 do {
-                    input = DocumentInterface.DocumentList(documents);
+                    input = DocumentInterface.documentList(documents);
                     DocumentInterface.handleChoice(input, documentDAO,bookDAO, magazineDAO, scientificJournalDAO, universityThesisDAO);
                 } while (input != 5);
                 break;
