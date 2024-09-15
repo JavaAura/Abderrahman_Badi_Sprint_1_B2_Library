@@ -16,7 +16,7 @@ import src.db.DatabaseConnection;
 public class StudentDAOImpl implements StudentDAO {
     
     private static final String SQL_FIND_BY_ID = "SELECT * FROM public.student WHERE id = ?";
-    private static final String SQL_LIST = "SELECT * FROM public.student WHERE is_deleted = false";
+    private static final String SQL_LIST = "SELECT * FROM public.student WHERE is_deleted = false ORDER BY id ASC";
     private static final String SQL_INSERT = "INSERT INTO public.student(name, last_name, registration_number, grade, major) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE public.student SET name=?, last_name=?, registration_number=?, grade=?, major=? WHERE id = ?;";
 

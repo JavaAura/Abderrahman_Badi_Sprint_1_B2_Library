@@ -16,7 +16,7 @@ import src.db.DatabaseConnection;
 public class ProfessorDAOImpl implements ProfessorDAO {
 
     private static final String SQL_FIND_BY_ID = "SELECT * FROM public.professor WHERE id = ?";
-    private static final String SQL_LIST = "SELECT * FROM public.professor WHERE is_deleted = false";
+    private static final String SQL_LIST = "SELECT * FROM public.professor WHERE is_deleted = false ORDER BY id ASC";
     private static final String SQL_INSERT = "INSERT INTO public.professor(name, last_name, registration_number, department) VALUES (?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE public.professor SET name=?, last_name=?, registration_number=?, department=? WHERE id = ?;";
 

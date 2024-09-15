@@ -17,7 +17,7 @@ import src.db.DatabaseConnection;
 
 public class ScientificJournalDAOImpl implements ScientificJournalDAO {
     private static final String SQL_FIND_BY_ID = "SELECT * FROM public.scientific_journal WHERE id = ?";
-    private static final String SQL_LIST = "SELECT * FROM public.scientific_journal WHERE is_deleted = false";
+    private static final String SQL_LIST = "SELECT * FROM public.scientific_journal WHERE is_deleted = false ORDER BY id ASC";
     private static final String SQL_INSERT = "INSERT INTO public.scientific_journal(title, author, publication_date, page_numbers, field) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE public.scientific_journal SET title=?, author=?, publication_date=?, page_numbers=?, field=? WHERE id = ?;";
 

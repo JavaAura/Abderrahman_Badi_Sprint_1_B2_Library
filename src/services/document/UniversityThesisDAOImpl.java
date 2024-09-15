@@ -17,7 +17,7 @@ import src.db.DatabaseConnection;
 
 public class UniversityThesisDAOImpl implements UniversityThesisDAO {
     private static final String SQL_FIND_BY_ID = "SELECT * FROM public.university_thesis WHERE id = ?";
-    private static final String SQL_LIST = "SELECT * FROM public.university_thesis WHERE is_deleted = false";
+    private static final String SQL_LIST = "SELECT * FROM public.university_thesis WHERE is_deleted = false ORDER BY id ASC";
     private static final String SQL_INSERT = "INSERT INTO public.university_thesis(title, author, publication_date, page_numbers, field) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE public.university_thesis SET title=?, author=?, publication_date=?, page_numbers=?, field=? WHERE id = ?;";
 

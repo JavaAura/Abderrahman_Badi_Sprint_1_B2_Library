@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import src.business.Book;
 import src.business.Document;
+import src.business.Magazine;
 import src.dao.interfaces.BookDAO;
 import src.dao.interfaces.DocumentDAO;
 import src.dao.interfaces.MagazineDAO;
@@ -88,7 +89,16 @@ public class DocumentInterface {
 
                 } while (true);
             case 2:
-                // List magazines
+                do {
+                    List<Magazine> magazines = magazineDAO.getAll();
+                    Magazine magazine = MagazineInterface.magazineList(magazines);
+                    if (magazine == null)
+                        break;
+                    magazine.showDetails();
+                    int input = documentManagementMenu(reservationDAO.isReserved(magazine));
+                    MagazineInterface.handleChoice(input, magazine, documentDAO, magazineDAO);
+
+                } while (true);
                 break;
             case 3:
                 // List journals

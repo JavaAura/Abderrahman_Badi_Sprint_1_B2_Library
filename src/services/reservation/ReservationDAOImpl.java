@@ -20,7 +20,7 @@ import src.enums.Status;
 
 public class ReservationDAOImpl implements ReservationDAO {
     private static final String SQL_FIND_BY_ID = "SELECT * FROM public.reservation WHERE id = ?";
-    private static final String SQL_LIST = "SELECT * FROM public.reservation WHERE isBorrowed = false AND return_date = NULL";
+    private static final String SQL_LIST = "SELECT * FROM public.reservation WHERE isBorrowed = false AND return_date = NULL ORDER BY id DESC";
     private static final String SQL_RESERVE_DOCUMENT = "INSERT INTO public.reservation(reservation_date,document_id, user_id) VALUES (?, ?, ?)";
     private static final String SQL_CANCEL_RESERVATION = "UPDATE public.reservation SET reservation_status = 'Canceled' WHERE id = ?";
     private static final String SQL_BORROW_DOCUMENT = "UPDATE public.reservation SET is_borrowed = true WHERE id = ?";

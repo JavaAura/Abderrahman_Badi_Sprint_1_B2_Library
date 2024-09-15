@@ -17,7 +17,7 @@ import src.db.DatabaseConnection;
 
 public class MagazineDAOImpl implements MagazineDAO {
     private static final String SQL_FIND_BY_ID = "SELECT * FROM public.magazine WHERE id = ?";
-    private static final String SQL_LIST = "SELECT * FROM public.magazine WHERE is_deleted = false";
+    private static final String SQL_LIST = "SELECT * FROM public.magazine WHERE is_deleted = false ORDER BY id ASC";
     private static final String SQL_INSERT = "INSERT INTO public.magazine(title, author, publication_date, page_numbers, isbn) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE public.magazine SET title=?, author=?, publication_date=?, page_numbers=?, isbn=? WHERE id = ?;";
 

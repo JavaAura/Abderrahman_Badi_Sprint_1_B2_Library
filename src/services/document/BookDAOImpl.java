@@ -17,7 +17,7 @@ import src.db.DatabaseConnection;
 
 public class BookDAOImpl implements BookDAO {
     private static final String SQL_FIND_BY_ID = "SELECT * FROM public.book WHERE id = ?";
-    private static final String SQL_LIST = "SELECT * FROM public.book WHERE is_deleted = false";
+    private static final String SQL_LIST = "SELECT * FROM public.book WHERE is_deleted = false ORDER BY id ASC";
     private static final String SQL_INSERT = "INSERT INTO public.book(title, author, publication_date, page_numbers, \"number\") VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE public.book SET title=?, author=?, publication_date=?, page_numbers=?, \"number\"=? WHERE id = ?;";
 
