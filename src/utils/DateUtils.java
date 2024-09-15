@@ -9,7 +9,7 @@ public class DateUtils {
 
         LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         if (parsedDate.isAfter(now)) {
-            throw new Exception("The date provided is not valid please input a date before" + now);
+            throw new Exception("The date provided is not valid please input a date before : " + now);
         }
         return parsedDate;
     }

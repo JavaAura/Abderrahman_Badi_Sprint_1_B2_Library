@@ -1,11 +1,37 @@
 package src.presentation.menus;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
+import src.business.Document;
+import src.business.Book;
+import src.business.Magazine;
+import src.business.ScientificJournal;
+import src.business.UniversityThesis;
+
+import src.dao.interfaces.BookDAO;
+import src.dao.interfaces.DocumentDAO;
+import src.dao.interfaces.MagazineDAO;
+import src.dao.interfaces.ScientificJournalDAO;
+import src.dao.interfaces.UniversityThesisDAO;
+import src.presentation.document.DocumentInterface;
 import src.presentation.interfaces.Menu;
+import src.services.document.BookDAOImpl;
+import src.services.document.DocumentDAOImpl;
+import src.services.document.MagazineDAOImpl;
+import src.services.document.ScientificJournalDAOImpl;
+import src.services.document.UniversityThesisDAOImpl;
+import src.utils.InputValidator;
 
 public class DocumentMenu implements Menu {
     Scanner in = new Scanner(System.in).useDelimiter(System.lineSeparator());
+
+    DocumentDAO documentDAO = new DocumentDAOImpl();
+    BookDAO bookDAO = new BookDAOImpl();
+    MagazineDAO magazineDAO = new MagazineDAOImpl();
+    ScientificJournalDAO scientificJournalDAO = new ScientificJournalDAOImpl();
+    UniversityThesisDAO universityThesisDAO = new UniversityThesisDAOImpl();
 
     @Override
     public void display() {
@@ -40,17 +66,56 @@ public class DocumentMenu implements Menu {
 
     @Override
     public void handleChoice(int choice) {
+        int input;
         switch (choice) {
             case 1:
-                // List All Documents
+                List<Document> documents = documentDAO.getAll();
+                do {
+                    input = DocumentInterface.DocumentList(documents);
+                    DocumentInterface.handleChoice(input, documentDAO,bookDAO, magazineDAO, scientificJournalDAO, universityThesisDAO);
+                } while (input != 5);
                 break;
             case 2:
-                // Add a Document
+                int selectedChoice = InputValidator
+                        .promptAndParseInt(
+                                "What would you like to add ?\n 1- Book \t\t 2- Magazine\n 3- Scientific journal\t 4- University thesis\nPick your choice : ",
+                                1,
+                                4);
+                String title = InputValidator.promptAndParseString("Document title : ");
+                String author = InputValidator.promptAndParseString("Document's author : ");
+                int pageNumbers = InputValidator.promptAndParseInt("Document total page number : ");
+                LocalDate publicationDate = InputValidator.promptAndParseDate("Document's publication date : ");
+                switch (selectedChoice) {
+                    case 1:
+                        int number = InputValidator.promptAndParseInt("Book's number :");
+                        Book book = new Book(title, author, publicationDate, pageNumbers, number);
+                        bookDAO.save(book);
+                        break;
+                    case 2:
+                        int isbn = InputValidator.promptAndParseInt("Magazine's isbn :");
+                        Magazine magazine = new Magazine(title, author, publicationDate, pageNumbers, isbn);
+                        magazineDAO.save(magazine);
+                        break;
+                    case 3:
+                        String journalField = InputValidator.promptAndParseString("Field : ");
+                        ScientificJournal scientificJournal = new ScientificJournal(title, author, publicationDate,
+                                pageNumbers, journalField);
+                        scientificJournalDAO.save(scientificJournal);
+                        break;
+                    case 4:
+                        String thesisField = InputValidator.promptAndParseString("Field : ");
+                        UniversityThesis universityThesis = new UniversityThesis(title, author, publicationDate,
+                                pageNumbers, thesisField);
+                        universityThesisDAO.save(universityThesis);
+                        break;
+                    default:
+                        break;
+                }
+
+                in.next();
                 break;
             case 3:
                 // Manage Reservations
-                break;
-            case 4:
                 break;
             default:
                 break;

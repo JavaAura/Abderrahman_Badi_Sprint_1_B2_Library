@@ -58,13 +58,13 @@ public class BookDAOImpl implements BookDAO {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
+                String title = resultSet.getString("title");
                 String author = resultSet.getString("author");
                 LocalDate publicationDate = resultSet.getDate("publication_date").toLocalDate();
                 int pageNumbers = resultSet.getInt("page_numbers");
-                int isbn = resultSet.getInt("isbn");
+                int number = resultSet.getInt("number");
 
-                Book book = new Book(id, name, author, publicationDate, pageNumbers, isbn);
+                Book book = new Book(id, title, author, publicationDate, pageNumbers, number);
 
                 books.add(book);
 

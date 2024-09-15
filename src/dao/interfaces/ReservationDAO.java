@@ -6,6 +6,8 @@ import src.business.User;
 
 public interface ReservationDAO extends DAO<Reservation>{
 
+    boolean isReserved(Document document);
+
     void saveReservation(Document document, User user);
 
     void cancelReservation(Reservation reservation);

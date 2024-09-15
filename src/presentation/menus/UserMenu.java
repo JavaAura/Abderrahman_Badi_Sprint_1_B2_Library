@@ -94,8 +94,10 @@ public class UserMenu implements Menu {
                     }
                 } while (selectedStudent == null);
 
-                UserInterface.ShowDetails(selectedStudent, userDAO, studentDAO, professorDAO);
+                if (selectedStudent == null)
+                    break;
 
+                UserInterface.ShowDetails(selectedStudent, userDAO, studentDAO, professorDAO);
                 break;
             case 3:
 
@@ -150,8 +152,6 @@ public class UserMenu implements Menu {
                 }
 
                 in.next();
-                break;
-            case 5:
                 break;
             default:
                 break;

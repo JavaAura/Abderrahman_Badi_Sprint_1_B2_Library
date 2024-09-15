@@ -9,6 +9,11 @@ public class ScientificJournal extends Document {
 
     }
 
+    public ScientificJournal(String name, String author, LocalDate publicationDate, int pageNumbers, String field) {
+        super(name, author, publicationDate, pageNumbers);
+        this.field = field;
+    }
+
     public ScientificJournal(long id, String name, String author, LocalDate publicationDate, int pageNumbers,
             String field) {
         super(id, name, author, publicationDate, pageNumbers);
@@ -23,7 +28,7 @@ public class ScientificJournal extends Document {
         System.out.println("\n\t Author: " + getAuthor());
         System.out.println("\n\t Publication Date: " + getPublicationDate());
         System.out.println("\n\t Number of Pages: " + getPageNumbers());
-        System.out.println("\n\t Book Number: " + this.field);
+        System.out.println("\n\t Field: " + getField());
     }
 
     public String getField() {

@@ -24,7 +24,8 @@ public class ReservationDAOImpl implements ReservationDAO {
     private static final String SQL_RESERVE_DOCUMENT = "INSERT INTO public.reservation(reservation_date,document_id, user_id) VALUES (?, ?, ?)";
     private static final String SQL_CANCEL_RESERVATION = "UPDATE public.reservation SET reservation_status = 'Canceled' WHERE id = ?";
     private static final String SQL_BORROW_DOCUMENT = "UPDATE public.reservation SET is_borrowed = true WHERE id = ?";
-    private static final String SQL_RETURN_DOCUMENT = "UPDATE public.reservation SET is_borrowed = false, return_date = ? WHERE id = ?";
+    private static final String SQL_RETURN_DOCUMENT = "UPDATE public.reservation SET is_borrowed = false, reservation_status = 'Canceled', return_date = ? WHERE id = ?";
+    private static final String SQL_IS_RESERVED = "SELECT EXISTS (SELECT 1 FROM public.reservation WHERE reservation_status = 'Active' AND document_id = ?)";
 
     @Override
     public Optional<Reservation> get(long id) {
@@ -161,6 +162,27 @@ public class ReservationDAOImpl implements ReservationDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean isReserved(Document document) {
+        boolean isReserved = false;
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_IS_RESERVED);
+            statement.setLong(1, document.getId());
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                isReserved = resultSet.getBoolean(1);
+            }
+
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return isReserved;
     }
 
     /* ----------------- UNSEUPPORTED METHODS ----------------- */

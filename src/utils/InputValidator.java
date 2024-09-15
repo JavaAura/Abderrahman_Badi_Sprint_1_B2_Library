@@ -44,8 +44,33 @@ public final class InputValidator {
             } catch (Exception e) {
                 System.out.print("Please pick a valid number...");
                 in.next();
+                in.next();
             }
         } while (true);
+    }
+
+    public static Integer promptAndParseNullableInt(String message) {
+        do {
+            try {
+                System.out.print(message);
+                String input = in.next();
+
+                if (input.isEmpty()) {
+                    return null;
+                }
+
+                Integer parsedInt = Integer.parseInt(input);
+                if (parsedInt > 0) {
+                    return parsedInt;
+                } else {
+                    System.out.println("Please enter a positive number.");
+                    in.next();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please pick a valid number.");
+            }
+        } while (true);
+
     }
 
     public static String promptAndParseString(String message) {
@@ -80,6 +105,26 @@ public final class InputValidator {
             try {
                 System.out.print(message);
                 String dateString = in.next();
+
+                return DateUtils.parseDate(dateString);
+            } catch (DateTimeParseException e) {
+                System.out.print("Invalid date format. Please enter the date in the format dd-MM-yyyy...");
+                in.next();
+            } catch (Exception e) {
+                System.out.print(e.getMessage());
+                in.next();
+            }
+        } while (true);
+    }
+
+    public static LocalDate promptAndParseNullableDate(String message) {
+        do {
+            try {
+                System.out.print(message);
+                String dateString = in.next();
+                
+                if (dateString.isEmpty())
+                    return null;
 
                 return DateUtils.parseDate(dateString);
             } catch (DateTimeParseException e) {

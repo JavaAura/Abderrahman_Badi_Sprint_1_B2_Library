@@ -58,13 +58,13 @@ public class MagazineDAOImpl implements MagazineDAO {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
+                String title = resultSet.getString("title");
                 String author = resultSet.getString("author");
                 LocalDate publicationDate = resultSet.getDate("publication_date").toLocalDate();
                 int pageNumbers = resultSet.getInt("page_numbers");
                 int isbn = resultSet.getInt("isbn");
 
-                Magazine magazine = new Magazine(id, name, author, publicationDate, pageNumbers, isbn);
+                Magazine magazine = new Magazine(id, title, author, publicationDate, pageNumbers, isbn);
 
                 magazines.add(magazine);
 

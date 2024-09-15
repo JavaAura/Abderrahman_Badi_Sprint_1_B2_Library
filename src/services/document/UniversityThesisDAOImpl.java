@@ -16,10 +16,10 @@ import src.dao.interfaces.UniversityThesisDAO;
 import src.db.DatabaseConnection;
 
 public class UniversityThesisDAOImpl implements UniversityThesisDAO {
-    private static final String SQL_FIND_BY_ID = "SELECT * FROM FROM public.university_thesis WHERE id = ?";
-    private static final String SQL_LIST = "SELECT * FROM FROM public.university_thesis WHERE is_deleted = false";
-    private static final String SQL_INSERT = "INSERT INTO FROM public.university_thesis(title, author, publication_date, page_numbers, field) VALUES (?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE FROM public.university_thesis SET title=?, author=?, publication_date=?, page_numbers=?, field=? WHERE id = ?;";
+    private static final String SQL_FIND_BY_ID = "SELECT * FROM public.university_thesis WHERE id = ?";
+    private static final String SQL_LIST = "SELECT * FROM public.university_thesis WHERE is_deleted = false";
+    private static final String SQL_INSERT = "INSERT INTO public.university_thesis(title, author, publication_date, page_numbers, field) VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE public.university_thesis SET title=?, author=?, publication_date=?, page_numbers=?, field=? WHERE id = ?;";
 
     @Override
     public Optional<UniversityThesis> get(long id) {
@@ -58,13 +58,13 @@ public class UniversityThesisDAOImpl implements UniversityThesisDAO {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
+                String title = resultSet.getString("title");
                 String author = resultSet.getString("author");
                 LocalDate publicationDate = resultSet.getDate("publication_date").toLocalDate();
                 int pageNumbers = resultSet.getInt("page_numbers");
                 String field = resultSet.getString("field");
 
-                UniversityThesis universityThesis = new UniversityThesis(id, name, author, publicationDate, pageNumbers,
+                UniversityThesis universityThesis = new UniversityThesis(id, title, author, publicationDate, pageNumbers,
                         field);
 
                 thesis.add(universityThesis);

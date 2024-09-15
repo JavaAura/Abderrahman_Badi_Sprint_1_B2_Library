@@ -13,6 +13,13 @@ abstract public class Document {
     public Document() {
     }
 
+    public Document(String title, String author, LocalDate publicationDate, int pageNumbers) {
+        this.title = title;
+        this.author = author;
+        this.publicationDate = publicationDate;
+        this.pageNumbers = pageNumbers;
+    }
+
     public Document(long id, String title, String author, LocalDate publicationDate, int pageNumbers) {
         this.id = id;
         this.title = title;

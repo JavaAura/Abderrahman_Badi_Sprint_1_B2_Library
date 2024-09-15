@@ -14,6 +14,11 @@ import java.time.LocalDate;
             super(id, name, author, publicationDate, pageNumbers);
         }
 
+        public Book(String name, String author, LocalDate publicationDate, int pageNumbers, int number) {
+            super(name, author, publicationDate, pageNumbers);
+            this.number = number;
+        }
+
         public Book(long id, String name, String author, LocalDate publicationDate, int pageNumbers, int number) {
             super(id, name, author, publicationDate, pageNumbers);
             this.number = number;
