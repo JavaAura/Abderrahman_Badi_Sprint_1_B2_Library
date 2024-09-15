@@ -17,6 +17,9 @@ public class UserInterface {
         public static Scanner in = new Scanner(System.in).useDelimiter(System.lineSeparator());
 
         public static void UserList(List<User> users) {
+                System.out.println("+------------------+");
+                System.out.println("|       Users      |");
+                System.out.println("+------------------+");
                 System.out.println(
                                 "+--------------------------------------------------------------------------------------+");
                 System.out.println(
@@ -33,6 +36,9 @@ public class UserInterface {
         }
 
         public static void StudentList(List<Student> students) {
+                System.out.println("+------------------+");
+                System.out.println("|     Students     |");
+                System.out.println("+------------------+");
                 System.out.println(
                                 "+--------------------------------------------------------------------------------------------------------------------------+");
                 System.out.println(
@@ -52,6 +58,9 @@ public class UserInterface {
         }
 
         public static void ProfessorList(List<Professor> professors) {
+                System.out.println("+------------------+");
+                System.out.println("|    Professors    |");
+                System.out.println("+------------------+");
                 System.out.println(
                                 "+-------------------------------------------------------------------------------------------------------------+");
                 System.out.println(
