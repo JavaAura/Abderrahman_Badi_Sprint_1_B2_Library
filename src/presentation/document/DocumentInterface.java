@@ -7,6 +7,7 @@ import src.business.Book;
 import src.business.Document;
 import src.business.Magazine;
 import src.business.ScientificJournal;
+import src.business.UniversityThesis;
 import src.dao.interfaces.BookDAO;
 import src.dao.interfaces.DocumentDAO;
 import src.dao.interfaces.MagazineDAO;
@@ -98,7 +99,6 @@ public class DocumentInterface {
                     magazine.showDetails();
                     int input = documentManagementMenu(reservationDAO.isReserved(magazine));
                     MagazineInterface.handleChoice(input, magazine, documentDAO, magazineDAO);
-
                 } while (true);
                 break;
             case 3:
@@ -110,22 +110,18 @@ public class DocumentInterface {
                     journal.showDetails();
                     int input = documentManagementMenu(reservationDAO.isReserved(journal));
                     JournalInterface.handleChoice(input, journal, documentDAO, scientificJournalDAO);
-
                 } while (true);
                 break;
             case 4:
                 do {
-                    List<Magazine> magazines = magazineDAO.getAll();
-                    Magazine magazine = MagazineInterface.magazineList(magazines);
-                    if (magazine == null)
+                    List<UniversityThesis> thesis = universityThesisDAO.getAll();
+                    UniversityThesis uniThesis = ThesisInterface.thesisList(thesis);
+                    if (uniThesis == null)
                         break;
-                    magazine.showDetails();
-                    int input = documentManagementMenu(reservationDAO.isReserved(magazine));
-                    MagazineInterface.handleChoice(input, magazine, documentDAO, magazineDAO);
-
+                    uniThesis.showDetails();
+                    int input = documentManagementMenu(reservationDAO.isReserved(uniThesis));
+                    ThesisInterface.handleChoice(input, uniThesis, documentDAO, universityThesisDAO);
                 } while (true);
-                break;
-            case 5:
                 break;
             default:
                 break;

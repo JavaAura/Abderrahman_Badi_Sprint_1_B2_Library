@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 import src.utils.InputValidator;
 
-import src.business.ScientificJournal;
+import src.business.UniversityThesis;
 import src.business.Professor;
 
-import src.dao.interfaces.ScientificJournalDAO;
+import src.dao.interfaces.UniversityThesisDAO;
 import src.dao.interfaces.DocumentDAO;
 import src.dao.interfaces.ReservationDAO;
 import src.dao.interfaces.ProfessorDAO;
@@ -19,7 +19,7 @@ import src.services.user.ProfessorDAOImpl;
 
 import src.presentation.user.UserInterface;
 
-public class JournalInterface {
+public class ThesisInterface {
     public static Scanner in = new Scanner(System.in).useDelimiter(System.lineSeparator());
     static ProfessorDAO professorDAO = new ProfessorDAOImpl();
     static ReservationDAO reservationDAO = new ReservationDAOImpl();
@@ -27,15 +27,15 @@ public class JournalInterface {
 
     static int selectedId = -1;
 
-    public static ScientificJournal journalList(List<ScientificJournal> journals) {
-        ScientificJournal selectedJournal = null;
+    public static UniversityThesis thesisList(List<UniversityThesis> thesis) {
+        UniversityThesis selectedThesis = null;
         int selectedId;
         do {
-            if (journals.size() == 0) {
+            if (thesis.size() == 0) {
                 System.out.println(
                         "+--------------------------------------------------------------------------------------+");
                 System.out.println(
-                        "|                                  No journals found                                  |");
+                        "|                                    No thesis found                                   |");
                 System.out.println(
                         "+--------------------------------------------------------------------------------------+\n\n\n");
 
@@ -48,13 +48,13 @@ public class JournalInterface {
                     "| Id |           Title          |          Author          |   Pages   | Publication Date |     Field    |");
             System.out.println(
                     "+--------------------------------------------------------------------------------------------------------+");
-            for (ScientificJournal journal : journals) {
-                System.out.printf("| %-3d| %-24s | %-24s | %-9d |    %-10s    | %-12s |\n", journal.getId(),
-                        journal.getTitle(),
-                        journal.getAuthor(),
-                        journal.getPageNumbers(),
-                        journal.getPublicationDate(),
-                        journal.getField());
+            for (UniversityThesis uniThesis : thesis) {
+                System.out.printf("| %-3d| %-24s | %-24s | %-9d |    %-10s    | %-12s |\n", uniThesis.getId(),
+                        uniThesis.getTitle(),
+                        uniThesis.getAuthor(),
+                        uniThesis.getPageNumbers(),
+                        uniThesis.getPublicationDate(),
+                        uniThesis.getField());
                 System.out.println(
                         "+--------------------------------------------------------------------------------------------------------+");
             }
@@ -65,13 +65,13 @@ public class JournalInterface {
                 selectedId = in.nextInt();
                 if (selectedId == 0)
                     break;
-                for (ScientificJournal journal : journals) {
-                    if (journal.getId() == selectedId) {
-                        selectedJournal = journal;
+                for (UniversityThesis uniThesis : thesis) {
+                    if (uniThesis.getId() == selectedId) {
+                        selectedThesis = uniThesis;
                         break;
                     }
                 }
-                if (selectedJournal == null) {
+                if (selectedThesis == null) {
                     System.out.println("Invalid ID. Please try again.");
                     in.next();
                 }
@@ -79,11 +79,11 @@ public class JournalInterface {
                 System.out.println("Invalid input. Please enter a valid number.");
                 in.next();
             }
-        } while (selectedJournal == null);
-        return selectedJournal;
+        } while (selectedThesis == null);
+        return selectedThesis;
     }
 
-    public static void handleChoice(int input, ScientificJournal journal, DocumentDAO documentDAO, ScientificJournalDAO scientificJournalDAO) {
+    public static void handleChoice(int input, UniversityThesis uniThesis, DocumentDAO documentDAO, UniversityThesisDAO universityThesisDAO) {
         switch (input) {
             case 1:
                 String title = InputValidator.promptAndParseNullableString("Title : ");
@@ -93,17 +93,17 @@ public class JournalInterface {
                 Integer pageNumbers = InputValidator.promptAndParseNullableInt("Page numbers : ");
                 String field = InputValidator.promptAndParseNullableString("Field : ");
 
-                scientificJournalDAO.update(journal,
+                universityThesisDAO.update(uniThesis,
                         new String[] { title, author,
                                 (publicationDate != null) ? publicationDate.toString() : null,
                                 (pageNumbers != null) ? pageNumbers.toString() : null,
                                 field });
                 break;
             case 2:
-                documentDAO.delete(journal);
+                documentDAO.delete(uniThesis);
                 break;
             case 3:
-                if (reservationDAO.isReserved(journal))
+                if (reservationDAO.isReserved(uniThesis))
                     break;
                 List<Professor> professors = professorDAO.getAll();
                 UserInterface.ProfessorList(professors);
@@ -135,7 +135,7 @@ public class JournalInterface {
                 if (selectedProfessor == null)
                     break;
 
-                documentService.reserveDocument(journal, selectedProfessor);
+                documentService.reserveDocument(uniThesis, selectedProfessor);
                 break;
             default:
                 break;
