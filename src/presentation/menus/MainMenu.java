@@ -7,12 +7,14 @@ import src.presentation.interfaces.Menu;
 public class MainMenu implements Menu {
     private Menu userMenu;
     private Menu documentMenu;
+    private Menu reservatioMenu;
 
     Scanner in = new Scanner(System.in).useDelimiter(System.lineSeparator());
 
-    public MainMenu(Menu userMenu, Menu documentMenu) {
+    public MainMenu(Menu userMenu, Menu documentMenu, Menu reservatioMenu) {
         this.userMenu = userMenu;
         this.documentMenu = documentMenu;
+        this.reservatioMenu = reservatioMenu;
     }
 
     @Override
@@ -23,7 +25,8 @@ public class MainMenu implements Menu {
         System.out.println("\t\t|                                        |");
         System.out.println("\t\t|     1- Manage Users                    |");
         System.out.println("\t\t|     2- Manage Documents                |");
-        System.out.println("\t\t|     3- Exit                            |");
+        System.out.println("\t\t|     3- Manage Documents                |");
+        System.out.println("\t\t|     4- Exit                            |");
         System.out.println("\t\t|                                        |");
         System.out.println("\t\t+----------------------------------------+");
         System.out.print("Pick your choice : ");
@@ -34,8 +37,8 @@ public class MainMenu implements Menu {
         int input = -1;
         try {
             input = in.nextInt();
-            if (input < 1 || input > 3) {
-                System.out.println("Please pick a choice between 1 and 3...");
+            if (input < 1 || input > 4) {
+                System.out.println("Please pick a choice between 1 and 4...");
                 in.next();
             }
         } catch (Exception e) {
@@ -55,7 +58,7 @@ public class MainMenu implements Menu {
                 documentMenuLoop();
                 break;
             case 3:
-                System.out.println("Exiting...");
+                reservationMenuLoop();
                 break;
             default:
                 break;
@@ -77,7 +80,16 @@ public class MainMenu implements Menu {
             documentMenu.display();
             choice = documentMenu.getChoice();
             documentMenu.handleChoice(choice);
-        } while (choice != 4);
+        } while (choice != 3);
+    }
+
+    private void reservationMenuLoop() {
+        int choice;
+        do {
+            reservatioMenu.display();
+            choice = reservatioMenu.getChoice();
+            reservatioMenu.handleChoice(choice);
+        } while (choice != 3);
     }
 
 }

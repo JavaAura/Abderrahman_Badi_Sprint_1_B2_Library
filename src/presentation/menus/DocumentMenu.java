@@ -41,8 +41,7 @@ public class DocumentMenu implements Menu {
         System.out.println("\t\t|                                        |");
         System.out.println("\t\t|     1- List All Documents              |");
         System.out.println("\t\t|     2- Add a Document                  |");
-        System.out.println("\t\t|     3- Manage Reservations             |");
-        System.out.println("\t\t|     4- Back                            |");
+        System.out.println("\t\t|     3- Back                            |");
         System.out.println("\t\t|                                        |");
         System.out.println("\t\t+----------------------------------------+");
         System.out.print("Pick your choice : ");
@@ -53,8 +52,8 @@ public class DocumentMenu implements Menu {
         int input = -1;
         try {
             input = in.nextInt();
-            if (input < 1 || input > 4) {
-                System.out.println("Please pick a choice between 1 and 4...");
+            if (input < 1 || input > 3) {
+                System.out.println("Please pick a choice between 1 and 3...");
                 in.next();
             }
         } catch (Exception e) {
@@ -72,7 +71,8 @@ public class DocumentMenu implements Menu {
                 List<Document> documents = documentDAO.getAll();
                 do {
                     input = DocumentInterface.documentList(documents);
-                    DocumentInterface.handleChoice(input, documentDAO,bookDAO, magazineDAO, scientificJournalDAO, universityThesisDAO);
+                    DocumentInterface.handleChoice(input, documentDAO, bookDAO, magazineDAO, scientificJournalDAO,
+                            universityThesisDAO);
                 } while (input != 5);
                 break;
             case 2:
@@ -113,9 +113,6 @@ public class DocumentMenu implements Menu {
                 }
 
                 in.next();
-                break;
-            case 3:
-                // Manage Reservations
                 break;
             default:
                 break;
