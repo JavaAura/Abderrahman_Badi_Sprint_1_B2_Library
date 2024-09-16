@@ -73,7 +73,8 @@ public class UniversityThesisDAOImpl implements UniversityThesisDAO {
 
             }
         } catch (SQLException e) {
-            System.out.println("Error retrieving users: " + e.getMessage());
+            System.out.println("Error retrieving thesis: " + e.getMessage());
+            e.printStackTrace();
         }
         return thesis;
     }

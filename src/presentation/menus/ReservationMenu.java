@@ -1,13 +1,17 @@
 package src.presentation.menus;
 
+import java.util.List;
 import java.util.Scanner;
 
+import src.business.Reservation;
+import src.dao.interfaces.ReservationDAO;
+import src.presentation.reservation.ReservationUI;
 import src.presentation.interfaces.Menu;
+import src.services.reservation.ReservationDAOImpl;
 
 public class ReservationMenu implements Menu {
     Scanner in = new Scanner(System.in).useDelimiter(System.lineSeparator());
-
-  
+    ReservationDAO reservationDAO = new ReservationDAOImpl();
 
     @Override
     public void display() {
@@ -43,13 +47,32 @@ public class ReservationMenu implements Menu {
     public void handleChoice(int choice) {
         switch (choice) {
             case 1:
-                // all reservations
+                do {
+                    List<Reservation> reservations = reservationDAO.getAll();
+                    Reservation selectedReservation = ReservationUI.reservationList(reservations);
+                    if (selectedReservation == null)
+                        break;
+                    selectedReservation.showReservationDetails();
+                    int input = ReservationUI.ReservationManagementMenu();
+                    ReservationUI.handleReservation(input, selectedReservation, reservationDAO);
+
+                } while (true);
                 break;
             case 2:
-                // all borrowed docs
+                do {
+                    List<Reservation> reservations = reservationDAO.getAllBorrowed();
+                    Reservation selectedReservation = ReservationUI.reservationList(reservations);
+                    if (selectedReservation == null)
+                        break;
+                    selectedReservation.showReservationDetails();
+                    int input = ReservationUI.BorrowingManagementMenu();
+                    ReservationUI.handleBorrowable(input, selectedReservation, reservationDAO);
+
+                } while (true);
                 break;
             default:
                 break;
         }
     }
+
 }

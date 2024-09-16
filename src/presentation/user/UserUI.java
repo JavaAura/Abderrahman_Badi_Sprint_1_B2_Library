@@ -12,7 +12,7 @@ import src.dao.interfaces.UserDAO;
 
 import src.utils.InputValidator;
 
-public class UserInterface {
+public class UserUI {
 
         public static Scanner in = new Scanner(System.in).useDelimiter(System.lineSeparator());
 

@@ -74,7 +74,8 @@ public class ScientificJournalDAOImpl implements ScientificJournalDAO {
 
             }
         } catch (SQLException e) {
-            System.out.println("Error retrieving users: " + e.getMessage());
+            System.out.println("Error retrieving journals: " + e.getMessage());
+            e.printStackTrace();
         }
         return journals;
     }

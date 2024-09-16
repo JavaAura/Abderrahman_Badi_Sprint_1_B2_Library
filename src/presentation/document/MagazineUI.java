@@ -5,37 +5,37 @@ import java.util.List;
 import java.util.Scanner;
 import src.utils.InputValidator;
 
-import src.business.ScientificJournal;
-import src.business.Professor;
+import src.business.Magazine;
+import src.business.Student;
 
-import src.dao.interfaces.ScientificJournalDAO;
+import src.dao.interfaces.MagazineDAO;
 import src.dao.interfaces.DocumentDAO;
 import src.dao.interfaces.ReservationDAO;
-import src.dao.interfaces.ProfessorDAO;
+import src.dao.interfaces.StudentDAO;
 
 import src.services.DocumentService;
 import src.services.reservation.ReservationDAOImpl;
-import src.services.user.ProfessorDAOImpl;
+import src.services.user.StudentDAOImpl;
 
-import src.presentation.user.UserInterface;
+import src.presentation.user.UserUI;
 
-public class JournalInterface {
+public class MagazineUI {
     public static Scanner in = new Scanner(System.in).useDelimiter(System.lineSeparator());
-    static ProfessorDAO professorDAO = new ProfessorDAOImpl();
+    static StudentDAO studentDAO = new StudentDAOImpl();
     static ReservationDAO reservationDAO = new ReservationDAOImpl();
     static DocumentService documentService = new DocumentService(reservationDAO);
 
     static int selectedId = -1;
 
-    public static ScientificJournal journalList(List<ScientificJournal> journals) {
-        ScientificJournal selectedJournal = null;
+    public static Magazine magazineList(List<Magazine> magazines) {
+        Magazine selectedMagazine = null;
         int selectedId;
         do {
-            if (journals.size() == 0) {
+            if (magazines.size() == 0) {
                 System.out.println(
                         "+--------------------------------------------------------------------------------------+");
                 System.out.println(
-                        "|                                  No journals found                                  |");
+                        "|                                  No magazines found                                  |");
                 System.out.println(
                         "+--------------------------------------------------------------------------------------+\n\n\n");
 
@@ -43,20 +43,20 @@ public class JournalInterface {
             }
 
             System.out.println(
-                    "+--------------------------------------------------------------------------------------------------------+");
+                    "+-------------------------------------------------------------------------------------------------------+");
             System.out.println(
-                    "| Id |           Title          |          Author          |   Pages   | Publication Date |     Field    |");
+                    "| Id |           Title          |          Author          |   Pages   | Publication Date |     isbn    |");
             System.out.println(
-                    "+--------------------------------------------------------------------------------------------------------+");
-            for (ScientificJournal journal : journals) {
-                System.out.printf("| %-3d| %-24s | %-24s | %-9d |    %-10s    | %-12s |\n", journal.getId(),
-                        journal.getTitle(),
-                        journal.getAuthor(),
-                        journal.getPageNumbers(),
-                        journal.getPublicationDate(),
-                        journal.getField());
+                    "+-------------------------------------------------------------------------------------------------------+");
+            for (Magazine magazine : magazines) {
+                System.out.printf("| %-3d| %-24s | %-24s | %-9d |    %-10s    | %-11d |\n", magazine.getId(),
+                        magazine.getTitle(),
+                        magazine.getAuthor(),
+                        magazine.getPageNumbers(),
+                        magazine.getPublicationDate(),
+                        magazine.getIsbn());
                 System.out.println(
-                        "+--------------------------------------------------------------------------------------------------------+");
+                        "+-------------------------------------------------------------------------------------------------------+");
             }
 
             System.out.print(
@@ -65,13 +65,13 @@ public class JournalInterface {
                 selectedId = in.nextInt();
                 if (selectedId == 0)
                     break;
-                for (ScientificJournal journal : journals) {
-                    if (journal.getId() == selectedId) {
-                        selectedJournal = journal;
+                for (Magazine magazine : magazines) {
+                    if (magazine.getId() == selectedId) {
+                        selectedMagazine = magazine;
                         break;
                     }
                 }
-                if (selectedJournal == null) {
+                if (selectedMagazine == null) {
                     System.out.println("Invalid ID. Please try again.");
                     in.next();
                 }
@@ -79,11 +79,11 @@ public class JournalInterface {
                 System.out.println("Invalid input. Please enter a valid number.");
                 in.next();
             }
-        } while (selectedJournal == null);
-        return selectedJournal;
+        } while (selectedMagazine == null);
+        return selectedMagazine;
     }
 
-    public static void handleChoice(int input, ScientificJournal journal, DocumentDAO documentDAO, ScientificJournalDAO scientificJournalDAO) {
+    public static void handleChoice(int input, Magazine magazine, DocumentDAO documentDAO, MagazineDAO magazineDAO) {
         switch (input) {
             case 1:
                 String title = InputValidator.promptAndParseNullableString("Title : ");
@@ -91,24 +91,24 @@ public class JournalInterface {
                 LocalDate publicationDate = InputValidator
                         .promptAndParseNullableDate("Publication date : ");
                 Integer pageNumbers = InputValidator.promptAndParseNullableInt("Page numbers : ");
-                String field = InputValidator.promptAndParseNullableString("Field : ");
+                Integer isbn = InputValidator.promptAndParseNullableInt("isbn : ");
 
-                scientificJournalDAO.update(journal,
+                magazineDAO.update(magazine,
                         new String[] { title, author,
                                 (publicationDate != null) ? publicationDate.toString() : null,
                                 (pageNumbers != null) ? pageNumbers.toString() : null,
-                                field });
+                                (isbn != null) ? isbn.toString() : null });
                 break;
             case 2:
-                documentDAO.delete(journal);
+                documentDAO.delete(magazine);
                 break;
             case 3:
-                if (reservationDAO.isReserved(journal))
+                if (reservationDAO.isReserved(magazine))
                     break;
-                List<Professor> professors = professorDAO.getAll();
-                UserInterface.ProfessorList(professors);
+                List<Student> students = studentDAO.getAll();
+                UserUI.StudentList(students);
 
-                Professor selectedProfessor = null;
+                Student selectedStudent = null;
 
                 do {
                     System.out.print(
@@ -117,25 +117,25 @@ public class JournalInterface {
                         selectedId = in.nextInt();
                         if (selectedId == 0)
                             break;
-                        for (Professor professor : professors) {
-                            if (professor.getId() == selectedId) {
-                                selectedProfessor = professor;
+                        for (Student student : students) {
+                            if (student.getId() == selectedId) {
+                                selectedStudent = student;
                                 break;
                             }
                         }
-                        if (selectedProfessor == null) {
+                        if (selectedStudent == null) {
                             System.out.println("Invalid ID. Please try again.");
                         }
                     } catch (Exception e) {
                         System.out.println("Invalid input. Please enter a valid number.");
                         in.next();
                     }
-                } while (selectedProfessor == null);
+                } while (selectedStudent == null);
 
-                if (selectedProfessor == null)
+                if (selectedStudent == null)
                     break;
 
-                documentService.reserveDocument(journal, selectedProfessor);
+                documentService.reserveDocument(magazine, selectedStudent);
                 break;
             default:
                 break;

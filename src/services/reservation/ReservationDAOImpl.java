@@ -17,10 +17,13 @@ import src.business.User;
 import src.dao.interfaces.ReservationDAO;
 import src.db.DatabaseConnection;
 import src.enums.Status;
+import src.services.document.DocumentDAOImpl;
+import src.services.user.UserDAOImpl;
 
 public class ReservationDAOImpl implements ReservationDAO {
     private static final String SQL_FIND_BY_ID = "SELECT * FROM public.reservation WHERE id = ?";
-    private static final String SQL_LIST = "SELECT * FROM public.reservation WHERE isBorrowed = false AND return_date = NULL ORDER BY id DESC";
+    private static final String SQL_LIST = "SELECT * FROM public.reservation WHERE is_borrowed = false AND return_date IS NULL AND reservation_status = 'Active' ORDER BY id DESC";
+    private static final String SQL_LIST_BORROWED = "SELECT * FROM public.reservation WHERE is_borrowed = true AND return_date IS NULL ORDER BY id DESC";
     private static final String SQL_RESERVE_DOCUMENT = "INSERT INTO public.reservation(reservation_date,document_id, user_id) VALUES (?, ?, ?)";
     private static final String SQL_CANCEL_RESERVATION = "UPDATE public.reservation SET reservation_status = 'Canceled' WHERE id = ?";
     private static final String SQL_BORROW_DOCUMENT = "UPDATE public.reservation SET is_borrowed = true WHERE id = ?";
@@ -44,8 +47,8 @@ public class ReservationDAOImpl implements ReservationDAO {
                         resultSet.getBoolean("is_borrowed"),
                         resultSet.getDate("return_date") != null ? resultSet.getDate("return_date").toLocalDate()
                                 : null,
-                        resultSet.getInt("document_id"),
-                        resultSet.getInt("user_id"));
+                        new UserDAOImpl().get(resultSet.getInt("document_id")).get(),
+                        new DocumentDAOImpl().get(resultSet.getInt("user_id")).get());
             }
 
             connection.close();
@@ -75,9 +78,11 @@ public class ReservationDAOImpl implements ReservationDAO {
                 int documentId = resultSet.getInt("document_id");
                 int userId = resultSet.getInt("user_id");
 
+                User user = new UserDAOImpl().get(userId).get();
+                Document document = new DocumentDAOImpl().get(documentId).get();
+
                 Reservation reservation = new Reservation(id, reservationDate, reservationStatus, isBorrowed,
-                        returnDate,
-                        documentId, userId);
+                        returnDate, user, document);
 
                 reservations.add(reservation);
 
@@ -85,7 +90,44 @@ public class ReservationDAOImpl implements ReservationDAO {
 
             }
         } catch (SQLException e) {
-            System.out.println("Error retrieving users: " + e.getMessage());
+            System.out.println("Error retrieving reservations: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return reservations;
+    }
+
+    @Override
+    public List<Reservation> getAllBorrowed() {
+        List<Reservation> reservations = new ArrayList<>();
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_LIST_BORROWED);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                LocalDate reservationDate = resultSet.getDate("reservation_date").toLocalDate();
+                Status reservationStatus = Status.valueOf(resultSet.getString("reservation_status"));
+                Boolean isBorrowed = resultSet.getBoolean("is_borrowed");
+                LocalDate returnDate = resultSet.getDate("return_date") != null
+                        ? resultSet.getDate("return_date").toLocalDate()
+                        : null;
+                int documentId = resultSet.getInt("document_id");
+                int userId = resultSet.getInt("user_id");
+
+                User user = new UserDAOImpl().get(userId).get();
+                Document document = new DocumentDAOImpl().get(documentId).get();
+
+                Reservation reservation = new Reservation(id, reservationDate, reservationStatus, isBorrowed,
+                        returnDate, user, document);
+
+                reservations.add(reservation);
+
+                connection.close();
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving reservations: " + e.getMessage());
+            e.printStackTrace();
         }
         return reservations;
     }

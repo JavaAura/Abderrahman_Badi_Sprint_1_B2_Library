@@ -72,7 +72,8 @@ public class MagazineDAOImpl implements MagazineDAO {
 
             }
         } catch (SQLException e) {
-            System.out.println("Error retrieving users: " + e.getMessage());
+            System.out.println("Error retrieving magazines: " + e.getMessage());
+            e.printStackTrace();
         }
         return magazines;
     }

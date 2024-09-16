@@ -16,7 +16,7 @@ import src.dao.interfaces.ScientificJournalDAO;
 import src.dao.interfaces.UniversityThesisDAO;
 import src.services.reservation.ReservationDAOImpl;
 
-public class DocumentInterface {
+public class DocumentUI {
 
     public static Scanner in = new Scanner(System.in).useDelimiter(System.lineSeparator());
 
@@ -82,45 +82,46 @@ public class DocumentInterface {
             case 1:
                 do {
                     List<Book> books = bookDAO.getAll();
-                    Book book = BookInterface.bookList(books);
+                    Book book = BookUI.bookList(books);
                     if (book == null)
                         break;
                     book.showDetails();
                     int input = documentManagementMenu(reservationDAO.isReserved(book));
-                    BookInterface.handleChoice(input, book, documentDAO, bookDAO);
+                    BookUI.handleChoice(input, book, documentDAO, bookDAO);
 
                 } while (true);
+                break;
             case 2:
                 do {
                     List<Magazine> magazines = magazineDAO.getAll();
-                    Magazine magazine = MagazineInterface.magazineList(magazines);
+                    Magazine magazine = MagazineUI.magazineList(magazines);
                     if (magazine == null)
                         break;
                     magazine.showDetails();
                     int input = documentManagementMenu(reservationDAO.isReserved(magazine));
-                    MagazineInterface.handleChoice(input, magazine, documentDAO, magazineDAO);
+                    MagazineUI.handleChoice(input, magazine, documentDAO, magazineDAO);
                 } while (true);
                 break;
             case 3:
                 do {
                     List<ScientificJournal> journals = scientificJournalDAO.getAll();
-                    ScientificJournal journal = JournalInterface.journalList(journals);
+                    ScientificJournal journal = JournalUI.journalList(journals);
                     if (journal == null)
                         break;
                     journal.showDetails();
                     int input = documentManagementMenu(reservationDAO.isReserved(journal));
-                    JournalInterface.handleChoice(input, journal, documentDAO, scientificJournalDAO);
+                    JournalUI.handleChoice(input, journal, documentDAO, scientificJournalDAO);
                 } while (true);
                 break;
             case 4:
                 do {
                     List<UniversityThesis> thesis = universityThesisDAO.getAll();
-                    UniversityThesis uniThesis = ThesisInterface.thesisList(thesis);
+                    UniversityThesis uniThesis = ThesisUI.thesisList(thesis);
                     if (uniThesis == null)
                         break;
                     uniThesis.showDetails();
                     int input = documentManagementMenu(reservationDAO.isReserved(uniThesis));
-                    ThesisInterface.handleChoice(input, uniThesis, documentDAO, universityThesisDAO);
+                    ThesisUI.handleChoice(input, uniThesis, documentDAO, universityThesisDAO);
                 } while (true);
                 break;
             default:

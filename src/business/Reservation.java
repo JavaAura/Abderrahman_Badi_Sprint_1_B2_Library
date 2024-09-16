@@ -10,17 +10,18 @@ public class Reservation {
     private Status reservationStatus;
     private Boolean isBorrowed;
     private LocalDate returnDate;
+    private User user;
+    private Document document;
     private long documentId;
     private long userId;
 
     public Reservation(long id, LocalDate reservationDate, Status reservationStatus, boolean isBorrowed,
-            LocalDate returnDate, long documentId,
-            long userId) {
+            LocalDate returnDate, User user, Document document) {
         this.id = id;
         this.reservationDate = reservationDate;
         this.reservationStatus = reservationStatus;
-        this.documentId = documentId;
-        this.userId = userId;
+        this.document = document;
+        this.user = user;
         this.isBorrowed = isBorrowed;
         this.returnDate = returnDate;
     }
@@ -30,6 +31,16 @@ public class Reservation {
         this.userId = userId;
         this.isBorrowed = isBorrowed;
         this.returnDate = returnDate;
+    }
+
+    public void showReservationDetails() {
+        System.out.println("\n Reservation Details:");
+        System.out.println("\n\t ID: " + getId());
+        System.out.println("\n\t Document ID: " + document.getId());
+        System.out.println("\n\t Book title: " + document.getTitle());
+        System.out.println("\n\t Reservor: " + user.getName() + " " + user.getLastName());
+        System.out.println("\n\t User registration number: " + user.getRegistrationNumber());
+        System.out.println("\n\t Reservation date: " + getReservationDate());
     }
 
     public LocalDate getReservationDate() {
@@ -86,5 +97,21 @@ public class Reservation {
 
     public void setId(long value) {
         this.id = value;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User value) {
+        this.user = value;
+    }
+
+    public Document getDocument() {
+        return this.document;
+    }
+
+    public void setDocument(Document value) {
+        this.document = value;
     }
 }

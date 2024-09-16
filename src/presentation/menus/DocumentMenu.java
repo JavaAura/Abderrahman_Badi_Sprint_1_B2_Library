@@ -15,7 +15,7 @@ import src.dao.interfaces.DocumentDAO;
 import src.dao.interfaces.MagazineDAO;
 import src.dao.interfaces.ScientificJournalDAO;
 import src.dao.interfaces.UniversityThesisDAO;
-import src.presentation.document.DocumentInterface;
+import src.presentation.document.DocumentUI;
 import src.presentation.interfaces.Menu;
 import src.services.document.BookDAOImpl;
 import src.services.document.DocumentDAOImpl;
@@ -70,8 +70,8 @@ public class DocumentMenu implements Menu {
             case 1:
                 List<Document> documents = documentDAO.getAll();
                 do {
-                    input = DocumentInterface.documentList(documents);
-                    DocumentInterface.handleChoice(input, documentDAO, bookDAO, magazineDAO, scientificJournalDAO,
+                    input = DocumentUI.documentList(documents);
+                    DocumentUI.handleChoice(input, documentDAO, bookDAO, magazineDAO, scientificJournalDAO,
                             universityThesisDAO);
                 } while (input != 5);
                 break;

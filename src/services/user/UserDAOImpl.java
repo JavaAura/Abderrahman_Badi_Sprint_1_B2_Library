@@ -15,9 +15,36 @@ import src.dao.interfaces.UserDAO;
 import src.db.DatabaseConnection;
 
 public class UserDAOImpl implements UserDAO {
-
+    private static final String SQL_FIND_BY_ID = "SELECT * FROM public.user WHERE id = ?";
     private static final String SQL_LIST = "SELECT * FROM public.\"user\" WHERE is_deleted = false ORDER BY id ASC";
     private static final String SQL_DELETE = "UPDATE public.user SET is_deleted = ? WHERE id = ?;";
+
+    @Override
+    public Optional<User> get(long id) {
+        User user = null;
+
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_ID);
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = new Student(
+                        resultSet.getLong("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("registration_number"));
+            }
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Optional.ofNullable(user);
+    }
+
 
     @Override
     public List<User> getAll() {
@@ -40,6 +67,7 @@ public class UserDAOImpl implements UserDAO {
             }
         } catch (SQLException e) {
             System.out.println("Error retrieving users: " + e.getMessage());
+            e.printStackTrace();
         }
 
         return users;
@@ -66,11 +94,6 @@ public class UserDAOImpl implements UserDAO {
     }
 
     /* ----------------- UNSEUPPORTED METHODS ----------------- */
-
-    @Override
-    public Optional<User> get(long id) {
-        throw new UnsupportedOperationException("Get operation is not supported in UserDAOImpl.");
-    }
 
     @Override
     public void save(User user) {

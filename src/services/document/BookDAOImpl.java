@@ -72,7 +72,8 @@ public class BookDAOImpl implements BookDAO {
 
             }
         } catch (SQLException e) {
-            System.out.println("Error retrieving users: " + e.getMessage());
+            System.out.println("Error retrieving books: " + e.getMessage());
+            e.printStackTrace();
         }
         return books;
     }

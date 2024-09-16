@@ -25,7 +25,7 @@ public class MainMenu implements Menu {
         System.out.println("\t\t|                                        |");
         System.out.println("\t\t|     1- Manage Users                    |");
         System.out.println("\t\t|     2- Manage Documents                |");
-        System.out.println("\t\t|     3- Manage Documents                |");
+        System.out.println("\t\t|     3- Manage Reservations             |");
         System.out.println("\t\t|     4- Exit                            |");
         System.out.println("\t\t|                                        |");
         System.out.println("\t\t+----------------------------------------+");
@@ -59,6 +59,9 @@ public class MainMenu implements Menu {
                 break;
             case 3:
                 reservationMenuLoop();
+                break;
+            case 4:
+                System.out.println("Exiting...");
                 break;
             default:
                 break;

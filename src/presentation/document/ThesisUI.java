@@ -5,37 +5,37 @@ import java.util.List;
 import java.util.Scanner;
 import src.utils.InputValidator;
 
-import src.business.Book;
-import src.business.Student;
+import src.business.UniversityThesis;
+import src.business.Professor;
 
-import src.dao.interfaces.BookDAO;
+import src.dao.interfaces.UniversityThesisDAO;
 import src.dao.interfaces.DocumentDAO;
 import src.dao.interfaces.ReservationDAO;
-import src.dao.interfaces.StudentDAO;
+import src.dao.interfaces.ProfessorDAO;
 
 import src.services.DocumentService;
 import src.services.reservation.ReservationDAOImpl;
-import src.services.user.StudentDAOImpl;
+import src.services.user.ProfessorDAOImpl;
 
-import src.presentation.user.UserInterface;
+import src.presentation.user.UserUI;
 
-public class BookInterface {
+public class ThesisUI {
     public static Scanner in = new Scanner(System.in).useDelimiter(System.lineSeparator());
-    static StudentDAO studentDAO = new StudentDAOImpl();
+    static ProfessorDAO professorDAO = new ProfessorDAOImpl();
     static ReservationDAO reservationDAO = new ReservationDAOImpl();
     static DocumentService documentService = new DocumentService(reservationDAO);
 
     static int selectedId = -1;
 
-    public static Book bookList(List<Book> books) {
-        Book selectedBook = null;
+    public static UniversityThesis thesisList(List<UniversityThesis> thesis) {
+        UniversityThesis selectedThesis = null;
         int selectedId;
         do {
-            if (books.size() == 0) {
+            if (thesis.size() == 0) {
                 System.out.println(
                         "+--------------------------------------------------------------------------------------+");
                 System.out.println(
-                        "|                                    No books found                                    |");
+                        "|                                    No thesis found                                   |");
                 System.out.println(
                         "+--------------------------------------------------------------------------------------+\n\n\n");
 
@@ -43,20 +43,20 @@ public class BookInterface {
             }
 
             System.out.println(
-                    "+-------------------------------------------------------------------------------------------------------+");
+                    "+--------------------------------------------------------------------------------------------------------+");
             System.out.println(
-                    "| Id |           Title          |          Author          |   Pages   | Publication Date | Book Number |");
+                    "| Id |           Title          |          Author          |   Pages   | Publication Date |     Field    |");
             System.out.println(
-                    "+-------------------------------------------------------------------------------------------------------+");
-            for (Book book : books) {
-                System.out.printf("| %-3d| %-24s | %-24s | %-9d |    %-10s    | %-11d |\n", book.getId(),
-                        book.getTitle(),
-                        book.getAuthor(),
-                        book.getPageNumbers(),
-                        book.getPublicationDate(),
-                        book.getNumber());
+                    "+--------------------------------------------------------------------------------------------------------+");
+            for (UniversityThesis uniThesis : thesis) {
+                System.out.printf("| %-3d| %-24s | %-24s | %-9d |    %-10s    | %-12s |\n", uniThesis.getId(),
+                        uniThesis.getTitle(),
+                        uniThesis.getAuthor(),
+                        uniThesis.getPageNumbers(),
+                        uniThesis.getPublicationDate(),
+                        uniThesis.getField());
                 System.out.println(
-                        "+-------------------------------------------------------------------------------------------------------+");
+                        "+--------------------------------------------------------------------------------------------------------+");
             }
 
             System.out.print(
@@ -65,13 +65,13 @@ public class BookInterface {
                 selectedId = in.nextInt();
                 if (selectedId == 0)
                     break;
-                for (Book book : books) {
-                    if (book.getId() == selectedId) {
-                        selectedBook = book;
+                for (UniversityThesis uniThesis : thesis) {
+                    if (uniThesis.getId() == selectedId) {
+                        selectedThesis = uniThesis;
                         break;
                     }
                 }
-                if (selectedBook == null) {
+                if (selectedThesis == null) {
                     System.out.println("Invalid ID. Please try again.");
                     in.next();
                 }
@@ -79,11 +79,11 @@ public class BookInterface {
                 System.out.println("Invalid input. Please enter a valid number.");
                 in.next();
             }
-        } while (selectedBook == null);
-        return selectedBook;
+        } while (selectedThesis == null);
+        return selectedThesis;
     }
 
-    public static void handleChoice(int input, Book book, DocumentDAO documentDAO, BookDAO bookDAO) {
+    public static void handleChoice(int input, UniversityThesis uniThesis, DocumentDAO documentDAO, UniversityThesisDAO universityThesisDAO) {
         switch (input) {
             case 1:
                 String title = InputValidator.promptAndParseNullableString("Title : ");
@@ -91,24 +91,24 @@ public class BookInterface {
                 LocalDate publicationDate = InputValidator
                         .promptAndParseNullableDate("Publication date : ");
                 Integer pageNumbers = InputValidator.promptAndParseNullableInt("Page numbers : ");
-                Integer number = InputValidator.promptAndParseNullableInt("Book number : ");
+                String field = InputValidator.promptAndParseNullableString("Field : ");
 
-                bookDAO.update(book,
+                universityThesisDAO.update(uniThesis,
                         new String[] { title, author,
                                 (publicationDate != null) ? publicationDate.toString() : null,
                                 (pageNumbers != null) ? pageNumbers.toString() : null,
-                                (number != null) ? number.toString() : null });
+                                field });
                 break;
             case 2:
-                documentDAO.delete(book);
+                documentDAO.delete(uniThesis);
                 break;
             case 3:
-                if (reservationDAO.isReserved(book))
+                if (reservationDAO.isReserved(uniThesis))
                     break;
-                List<Student> students = studentDAO.getAll();
-                UserInterface.StudentList(students);
+                List<Professor> professors = professorDAO.getAll();
+                UserUI.ProfessorList(professors);
 
-                Student selectedStudent = null;
+                Professor selectedProfessor = null;
 
                 do {
                     System.out.print(
@@ -117,25 +117,25 @@ public class BookInterface {
                         selectedId = in.nextInt();
                         if (selectedId == 0)
                             break;
-                        for (Student student : students) {
-                            if (student.getId() == selectedId) {
-                                selectedStudent = student;
+                        for (Professor professor : professors) {
+                            if (professor.getId() == selectedId) {
+                                selectedProfessor = professor;
                                 break;
                             }
                         }
-                        if (selectedStudent == null) {
+                        if (selectedProfessor == null) {
                             System.out.println("Invalid ID. Please try again.");
                         }
                     } catch (Exception e) {
                         System.out.println("Invalid input. Please enter a valid number.");
                         in.next();
                     }
-                } while (selectedStudent == null);
+                } while (selectedProfessor == null);
 
-                if (selectedStudent == null)
+                if (selectedProfessor == null)
                     break;
 
-                documentService.reserveDocument(book, selectedStudent);
+                documentService.reserveDocument(uniThesis, selectedProfessor);
                 break;
             default:
                 break;

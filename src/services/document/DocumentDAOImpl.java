@@ -16,8 +16,36 @@ import src.dao.interfaces.DocumentDAO;
 import src.db.DatabaseConnection;
 
 public class DocumentDAOImpl implements DocumentDAO {
+    private static final String SQL_FIND_BY_ID = "SELECT * FROM public.document WHERE id = ?";
     private static final String SQL_LIST = "SELECT * FROM public.document WHERE is_deleted = false ORDER BY id ASC";
     private static final String SQL_DELETE = "UPDATE public.document SET is_deleted = ? WHERE id = ?;";
+
+    @Override
+    public Optional<Document> get(long id) {
+        Document document = null;
+
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_ID);
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                document = new Book(
+                        resultSet.getLong("id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getDate("publication_date").toLocalDate(),
+                        resultSet.getInt("page_numbers"));
+            }
+
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Optional.ofNullable(document);
+    }
 
     @Override
     public List<Document> getAll() {
@@ -39,7 +67,8 @@ public class DocumentDAOImpl implements DocumentDAO {
                 connection.close();
             }
         } catch (SQLException e) {
-            System.out.println("Error retrieving users: " + e.getMessage());
+            System.out.println("Error retrieving documents: " + e.getMessage());
+            e.printStackTrace();
         }
 
         return documentsList;
@@ -65,11 +94,6 @@ public class DocumentDAOImpl implements DocumentDAO {
     }
 
     /* ----------------- UNSEUPPORTED METHODS ----------------- */
-
-    @Override
-    public Optional<Document> get(long id) {
-        throw new UnsupportedOperationException("Get operation is not supported in DocumentDAOImpl.");
-    }
 
     public void save(Document document) {
         throw new UnsupportedOperationException("Save operation is not supported in DocumentDAOImpl.");

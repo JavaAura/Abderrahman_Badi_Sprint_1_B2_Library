@@ -68,7 +68,8 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 
             }
         } catch (SQLException e) {
-            System.out.println("Error retrieving users: " + e.getMessage());
+            System.out.println("Error retrieving professors: " + e.getMessage());
+            e.printStackTrace();
         }
         return professors;
     }
