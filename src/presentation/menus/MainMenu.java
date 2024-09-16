@@ -83,7 +83,7 @@ public class MainMenu implements Menu {
             documentMenu.display();
             choice = documentMenu.getChoice();
             documentMenu.handleChoice(choice);
-        } while (choice != 3);
+        } while (choice != 4);
     }
 
     private void reservationMenuLoop() {

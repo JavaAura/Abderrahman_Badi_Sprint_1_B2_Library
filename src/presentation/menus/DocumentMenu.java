@@ -41,7 +41,8 @@ public class DocumentMenu implements Menu {
         System.out.println("\t\t|                                        |");
         System.out.println("\t\t|     1- List All Documents              |");
         System.out.println("\t\t|     2- Add a Document                  |");
-        System.out.println("\t\t|     3- Back                            |");
+        System.out.println("\t\t|     3- Find Document                   |");
+        System.out.println("\t\t|     4- Back                            |");
         System.out.println("\t\t|                                        |");
         System.out.println("\t\t+----------------------------------------+");
         System.out.print("Pick your choice : ");
@@ -52,8 +53,8 @@ public class DocumentMenu implements Menu {
         int input = -1;
         try {
             input = in.nextInt();
-            if (input < 1 || input > 3) {
-                System.out.println("Please pick a choice between 1 and 3...");
+            if (input < 1 || input > 4) {
+                System.out.println("Please pick a choice between 1 and 4...");
                 in.next();
             }
         } catch (Exception e) {
@@ -112,6 +113,12 @@ public class DocumentMenu implements Menu {
                         break;
                 }
 
+                in.next();
+                break;
+            case 3:
+                String userInput = InputValidator.promptAndParseString("Search (title, author, ...) : ");
+                List<Document> searchedDocuments = documentDAO.findDocument(userInput);
+                input = DocumentUI.documentList(searchedDocuments);
                 in.next();
                 break;
             default:
