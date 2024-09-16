@@ -22,7 +22,7 @@ public class DocumentUI {
 
     static ReservationDAO reservationDAO = new ReservationDAOImpl();
 
-    public static int documentList(List<Document> documents) {
+    public static int documentList(List<Document> documents, Boolean isSearching) {
         int input = -1;
         do {
             if (documents.size() == 0) {
@@ -50,6 +50,9 @@ public class DocumentUI {
                 System.out.println(
                         "+-----------------------------------------------------------------------------------------+");
             }
+
+            if (isSearching)
+                break;
 
             System.out.println("\t\t+----------------------------------------+");
             System.out.println("\t\t|                                        |");

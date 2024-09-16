@@ -71,7 +71,7 @@ public class DocumentMenu implements Menu {
             case 1:
                 List<Document> documents = documentDAO.getAll();
                 do {
-                    input = DocumentUI.documentList(documents);
+                    input = DocumentUI.documentList(documents, false);
                     DocumentUI.handleChoice(input, documentDAO, bookDAO, magazineDAO, scientificJournalDAO,
                             universityThesisDAO);
                 } while (input != 5);
@@ -118,7 +118,7 @@ public class DocumentMenu implements Menu {
             case 3:
                 String userInput = InputValidator.promptAndParseString("Search (title, author, ...) : ");
                 List<Document> searchedDocuments = documentDAO.findDocument(userInput);
-                input = DocumentUI.documentList(searchedDocuments);
+                input = DocumentUI.documentList(searchedDocuments, true);
                 in.next();
                 break;
             default:

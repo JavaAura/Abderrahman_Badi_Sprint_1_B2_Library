@@ -18,7 +18,7 @@ import src.db.DatabaseConnection;
 public class DocumentDAOImpl implements DocumentDAO {
     private static final String SQL_FIND_BY_ID = "SELECT * FROM public.document WHERE id = ?";
     private static final String SQL_LIST = "SELECT * FROM public.document WHERE is_deleted = false ORDER BY id ASC";
-    private static final String SQL_SEARCH = "SELECT * FROM public.document WHERE is_deleted = false AND title ILIKE '%?%' OR author ILIKE '%?%' ORDER BY id ASC";
+    private static final String SQL_SEARCH = "SELECT * FROM public.document WHERE is_deleted = false AND (title ILIKE ? OR author ILIKE ?) ORDER BY id ASC";
     private static final String SQL_DELETE = "UPDATE public.document SET is_deleted = ? WHERE id = ?;";
 
     @Override
@@ -81,8 +81,11 @@ public class DocumentDAOImpl implements DocumentDAO {
         try {
             Connection connection = DatabaseConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_SEARCH);
-            statement.setString(1, input);
-            statement.setString(2, input);
+
+            String searchQuery = "%" + input + "%";
+            statement.setString(1, searchQuery);
+            statement.setString(2, searchQuery);
+
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
