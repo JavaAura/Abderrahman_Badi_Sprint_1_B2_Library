@@ -6,7 +6,7 @@ A simple Java application for managing a collection of books and magazines in a 
 ## Table of Contents
 
 - [Installation](#installation)
-- [Configuration](#configuration)
+- [Structure](#Structure)
 - [Features](#features)
 
 ## Installation
@@ -14,7 +14,31 @@ A simple Java application for managing a collection of books and magazines in a 
 ### Prerequisites
 
 - Java 8 or higher
+- PostgreSQL JDBC Driver
 - A terminal or command prompt
+
+### Setup environment variable
+
+1. **For windows:**
+   ```cmd
+   set DB_URL= **Your postgreSQL URL**
+   set DB_USER= **DB User**
+   set DB_PASSWORD = **LEAVE EMPTY IF NO PASSWORD**
+
+2. **For linux based:**
+   ```bash
+   export DB_URL= **Your postgreSQL URL**
+   export DB_USER= **DB User**
+   export DB_PASSWORD = **LEAVE EMPTY IF NO PASSWORD**
+
+### Setup your database:
+
+1. Ensure your PostgreSQL server is running.
+2. Navigate to the directory containing `Database.sql`.
+3. Run the following command to create the database and tables:
+   ```bash
+   psql -U your_username -f Database.sql
+   
 
 ### Steps
 
@@ -24,27 +48,30 @@ A simple Java application for managing a collection of books and magazines in a 
    git clone https://github.com/Yorften/Brief-1.git
    cd Brief-1
 
-2. **Run the command:**
-   ```
-   java -jar LibraryProject.jar
+2. **Compile the project:**
+   ```sh
+   javac -d out src/**/*.java
 
-## Configuration
+3. **Run the command:**
+   ```sh
+   jar cfm YourApp.jar MANIFEST.MF -C out/ .
 
-The application uses default settings to initialize the library with 20 seeded documents. If you want to modify the seed data, follow these steps:
+4. **Run the application:**
+   ```sh
+   java -jar YourApp.jar
 
-### Edit the Seed Data:
+## Structure
 
-In the Library class, find the seedLibrary method and adjust the predefined books and magazines as needed. You can change titles, authors, publication dates, and borrowing statuses.
-
-### Change the Default Behavior:
-
-You may modify any other configuration, such as changing menu options or customizing how documents are displayed, by editing the respective methods in the ConsoleUI class.
-
+- **DAO Layer**: Handles database interactions for CRUD operations on users, documents, and reservations.
+- **Model Layer**: Defines entities such as `User`, `Document`, and `Reservation`, including specific document types like `Book`, `Magazine`, etc.
+- **Service Layer**: Manages core business logic and acts as an intermediary between the DAO and user input.
+- **Presentation Layer**: Manages the interaction with the end-user, this layer includes input handling, menu navigation, and output formatting. Examples are the methods that display lists of users, documents, or prompt the user for input. Classes related to this layer include `UserMenu`, `MainMenu`, etc. 
 
 ## Features
 
-1. Add Documents: Add new books or magazines to the library.
-2. List All Documents: View all available and borrowed documents.
-3. Search Documents: Search for a specific document by title.
-4. Borrow and Return Documents: Manage the borrowing and returning of documents.
-5. Filter and Sort Documents: Filter documents by availability and sort using a custom comparator.
+1. User Management: The application allows the management of users such as students and professors. Users can be listed, added, updated, and deleted from the system.
+2. Document Management: The system supports managing different types of documents like books, theses, magazines, and journals. Users can search, list, and modify document details.
+3. Reservation System: Users (students or professors) can reserve documents, and the system keeps track of active or canceled reservations, including borrowed documents and their return dates.
+4. Search Functionality: The application allows for partial matching when searching for documents by title or author.
+5. Database Management: The application interacts with a PostgreSQL database to store, retrieve, update, and delete information related to users, documents, and reservations.
+6. Error Handling and Input Validation: Input from users is validated, and exceptions are caught to prevent application crashes. For example, invalid dates or null inputs are handled gracefully.
